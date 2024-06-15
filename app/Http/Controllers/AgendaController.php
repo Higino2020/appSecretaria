@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agenda;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class AgendaController extends Controller
 {
@@ -13,53 +14,48 @@ class AgendaController extends Controller
     public function index()
     {
         //
+        $agenda= Agenda::all();
+        return view("pages.agenda",compact("agenda"));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         //
+        $agenda=null;
+        if(isset($request->id)){
+            $agenda= Agenda::find($request->id);
+        }else{
+            $agenda= new Agenda();
+            $agenda->data=$request->data;
+            $agenda->hora_inicio=$request->hora_inicio;
+            $agenda->hora_fim=$request->hora_fim;
+            $agenda->descricao_evento=$request->descricao_evento;
+            $agenda->local=$request->local;
+            $agenda->participante=$request->participante ?? $agenda->participante;
+            $agenda->tipo_evento=$request->tipo_evento;
+            return redirect()->back()->with("SUCESSO","AGENDA CADASTRADO");
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Agenda $agenda)
+    public function show( $id)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Agenda $agenda)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Agenda $agenda)
-    {
-        //
+        $agenda=Agenda::find($id);
+        return view("pages.agenda",compact("agenda"));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Agenda $agenda)
+    public function apagar( $id)
     {
         //
+        Agenda::find($id)->delete;
+        return redirect()->back()->with("SUCESSO","AGENDA ELIMINADO");
     }
 }

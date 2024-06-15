@@ -13,53 +13,47 @@ class CorrespondeciaController extends Controller
     public function index()
     {
         //
+        $valor= Correspondecia::all();
+        return view("pages.Correspondencia",compact("valor"));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         //
+        $valor=null;
+        if(isset($request->id)){
+            $valor= Correspondecia::find($request->id);
+        }else{
+            $valor= new Correspondecia();
+            $valor->tipo=$request->tipo;
+            $valor->data=$request->data;
+            $valor->remetente=$request->remetente;
+            $valor->destinatario=$request->destinatario;
+            $valor->assunto=$request->assunto;
+            $valor->descricao=$request->descricao;
+            return redirect()->back()->with("SUCESSO","CORRESPONDENCIA CADASTRADO");
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Correspondecia $correspondecia)
+    public function show( $id)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Correspondecia $correspondecia)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Correspondecia $correspondecia)
-    {
-        //
+        $valor=Correspondecia::find($id);
+        return view("pages.Correspondencia",compact("valor"));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Correspondecia $correspondecia)
+    public function apagar( $id)
     {
         //
+        Correspondecia::find($id)->delete;
+        return redirect()->back()->with("SUCESSO","CORRESPONDENCIA ELIMINADO");
     }
 }

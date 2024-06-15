@@ -13,53 +13,46 @@ class RecursoController extends Controller
     public function index()
     {
         //
+        $valor= Recurso::all();
+        return view("pages.Recurso",compact("valor"));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         //
+        $valor=null;
+        if(isset($request->id)){
+            $valor= Recurso::find($request->id);
+        }else{
+            $valor= new Recurso();
+            $valor->nome_recurso=$request->nome_recurso;
+            $valor->tipo_recurso=$request->tipo_recurso;
+            $valor->descricao=$request->descricao;
+            $valor->localizacao=$request->localizacao;
+            $valor->status=$request->status;
+            return redirect()->back()->with("SUCESSO","RECURSO CADASTRADO");
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Recurso $recurso)
+    public function show( $id)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Recurso $recurso)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Recurso $recurso)
-    {
-        //
+        $valor=Recurso::find($id);
+        return view("pages.Recurso",compact("valor"));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Recurso $recurso)
+    public function apagar( $id)
     {
         //
+        Recurso::find($id)->delete;
+        return redirect()->back()->with("SUCESSO","RECURSO ELIMINADO");
     }
 }

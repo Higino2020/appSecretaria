@@ -13,53 +13,48 @@ class TarefaController extends Controller
     public function index()
     {
         //
+        $valor= Tarefa::all();
+        return view("pages.Tarefa",compact("valor"));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         //
+        $valor=null;
+        if(isset($request->id)){
+            $valor= Tarefa::find($request->id);
+        }else{
+            $valor= new Tarefa();
+            $valor->nome_tarefa=$request->nome_tarefa;
+            $valor->descricao=$request->descricao;
+            $valor->data_limite=$request->data_limite;
+            $valor->status=$request->status;
+            $valor->prioridade=$request->prioridade;
+            $valor->responsavel=$request->responsavel ?? $valor->responsavel;
+            $valor->projeto_id=$request->projeto_id ?? $valor->projeto_id;
+            return redirect()->back()->with("SUCESSO","TAREFA CADASTRADO");
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Tarefa $tarefa)
+    public function show( $id)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Tarefa $tarefa)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Tarefa $tarefa)
-    {
-        //
+        $valor=Tarefa::find($id);
+        return view("pages.Tarefa",compact("valor"));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tarefa $tarefa)
+    public function apagar( $id)
     {
         //
+        Tarefa::find($id)->delete;
+        return redirect()->back()->with("SUCESSO","TAREFA ELIMINADO");
     }
 }

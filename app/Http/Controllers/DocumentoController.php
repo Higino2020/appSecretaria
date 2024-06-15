@@ -13,14 +13,8 @@ class DocumentoController extends Controller
     public function index()
     {
         //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $doc= Documento::all();
+        return view("pages.Documento",compact("doc"));
     }
 
     /**
@@ -29,37 +23,38 @@ class DocumentoController extends Controller
     public function store(Request $request)
     {
         //
+        $doc=null;
+        if(isset($request->id)){
+            $doc= Documento::find($request->id);
+        }else{
+            $doc= new Documento();
+            $doc->tipo_documento=$request->tipo_documento;
+            $doc->descricao=$request->descricao;
+            $doc->data_criacao=$request->data_criacao;
+            $doc->funcionario_id=$request->funcionario_id ?? $doc->funcionario_id;
+            $doc->localizacao_arquivo=$request->localizacao_arquivo;
+            $doc->status=$request->status;
+            return redirect()->back()->with("SUCESSO","DOCUMENTO CADASTRADO");
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Documento $documento)
+    public function show( $id)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Documento $documento)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Documento $documento)
-    {
-        //
+        $doc=Documento::find($id);
+        return view("pages.Documento",compact("doc"));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Documento $documento)
+    public function apagar( $id)
     {
         //
+        Documento::find($id)->delete;
+        return redirect()->back()->with("SUCESSO","DOCUMENTO ELIMINADO");
     }
 }

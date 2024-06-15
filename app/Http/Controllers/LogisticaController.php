@@ -7,59 +7,49 @@ use Illuminate\Http\Request;
 
 class LogisticaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         //
+        $valor= Logistica::all();
+        return view("pages.Logistica",compact("valor"));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         //
+        $valor=null;
+        if(isset($request->id)){
+            $valor= Logistica::find($request->id);
+        }else{
+            $valor= new Logistica();
+            $valor->nome_evento=$request->nome_evento;
+            $valor->data_evento=$request->data_evento;
+            $valor->local=$request->local;
+            $valor->descricao=$request->descricao;
+            $valor->responsavel=$request->responsavel ?? $valor->responsavel;
+            return redirect()->back()->with("SUCESSO","LOGISTICA CADASTRADO");
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Logistica $logistica)
+    public function show( $id)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Logistica $logistica)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Logistica $logistica)
-    {
-        //
+        $valor=Logistica::find($id);
+        return view("pages.Logistica",compact("valor"));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Logistica $logistica)
+    public function apagar( $id)
     {
         //
+        Logistica::find($id)->delete;
+        return redirect()->back()->with("SUCESSO","LOGISTICA ELIMINADO");
     }
 }

@@ -13,53 +13,46 @@ class FinanceiroController extends Controller
     public function index()
     {
         //
+        $valor= Financeiro::all();
+        return view("pages.Financa",compact("valor"));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         //
+        $valor=null;
+        if(isset($request->id)){
+            $valor= Financeiro::find($request->id);
+        }else{
+            $valor= new Financeiro();
+            $valor->tipo_transacao=$request->tipo_transacao;
+            $valor->data=$request->data;
+            $valor->valor=$request->valor;
+            $valor->descricao=$request->descricao;
+            $valor->categoria=$request->categoria;
+            $valor->responsavel=$request->responsavel ?? $valor->responsavel;
+            return redirect()->back()->with("SUCESSO","FINANCEIRO CADASTRADO");
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Financeiro $financeiro)
+    public function show( $id)
     {
         //
+        $valor= Financeiro::find($id);
+        return view("pages.Financa",compact("valor"));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Financeiro $financeiro)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Financeiro $financeiro)
-    {
-        //
-    }
-
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Financeiro $financeiro)
+    public function apagar( $id)
     {
         //
+        Financeiro::find($id)->delete;
+        return redirect()->back()->with("SUCESSO","FINANCEIRO ELIMINADO");
     }
 }

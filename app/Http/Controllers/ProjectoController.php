@@ -13,53 +13,47 @@ class ProjectoController extends Controller
     public function index()
     {
         //
+        $valor= Projecto::all();
+        return view("pages.Projecto",compact("valor"));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         //
+        $valor=null;
+        if(isset($request->id)){
+            $valor= Projecto::find($request->id);
+        }else{
+            $valor= new Projecto();
+            $valor->nome_projeto=$request->nome_projeto;
+            $valor->descricao=$request->descricao;
+            $valor->data_inicio=$request->data_inicio;
+            $valor->data_termino=$request->data_termino;
+            $valor->status=$request->status;
+            $valor->responsavel=$request->responsavel ?? $valor->responsavel;
+            return redirect()->back()->with("SUCESSO","PROJECTO CADASTRADO");
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Projecto $projecto)
+    public function show( $id)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Projecto $projecto)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Projecto $projecto)
-    {
-        //
+        $valor=Projecto::find($id);
+        return view("pages.Projecto",compact("valor"));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Projecto $projecto)
+    public function apagar( $id)
     {
         //
+        Projecto::find($id)->delete;
+        return redirect()->back()->with("SUCESSO","PROJECTO ELIMINADO");
     }
 }
