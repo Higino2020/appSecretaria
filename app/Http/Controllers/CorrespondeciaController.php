@@ -14,7 +14,7 @@ class CorrespondeciaController extends Controller
     {
         //
         $valor= Correspondecia::all();
-        return view("pages.Correspondencia",compact("valor"));
+        return view("pages.correspondencia",compact("valor"));
     }
     /**
      * Store a newly created resource in storage.
@@ -27,14 +27,14 @@ class CorrespondeciaController extends Controller
             $valor= Correspondecia::find($request->id);
         }else{
             $valor= new Correspondecia();
-            $valor->tipo=$request->tipo;
-            $valor->data=$request->data;
-            $valor->remetente=$request->remetente;
-            $valor->destinatario=$request->destinatario;
-            $valor->assunto=$request->assunto;
-            $valor->descricao=$request->descricao;
-            return redirect()->back()->with("SUCESSO","CORRESPONDENCIA CADASTRADO");
         }
+        $valor->tipo=$request->tipo;
+        $valor->data=$request->data;
+        $valor->remetente=$request->remetente;
+        $valor->destinatario=$request->destinatario;
+        $valor->assunto=$request->assunto;
+        $valor->descricao=$request->descricao;
+        return redirect()->back()->with("Sucesso","CORRESPONDENCIA CADASTRADO");
     }
 
     /**
@@ -44,7 +44,7 @@ class CorrespondeciaController extends Controller
     {
         //
         $valor=Correspondecia::find($id);
-        return view("pages.Correspondencia",compact("valor"));
+        return view("pages.correspondencia",compact("valor"));
     }
 
     /**
@@ -54,6 +54,6 @@ class CorrespondeciaController extends Controller
     {
         //
         Correspondecia::find($id)->delete;
-        return redirect()->back()->with("SUCESSO","CORRESPONDENCIA ELIMINADO");
+        return redirect()->back()->with("Sucesso","CORRESPONDENCIA ELIMINADO");
     }
 }

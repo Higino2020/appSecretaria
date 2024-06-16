@@ -14,7 +14,7 @@ class DocumentoController extends Controller
     {
         //
         $doc= Documento::all();
-        return view("pages.Documento",compact("doc"));
+        return view("pages.documento",compact("doc"));
     }
 
     /**
@@ -28,14 +28,14 @@ class DocumentoController extends Controller
             $doc= Documento::find($request->id);
         }else{
             $doc= new Documento();
-            $doc->tipo_documento=$request->tipo_documento;
-            $doc->descricao=$request->descricao;
-            $doc->data_criacao=$request->data_criacao;
-            $doc->funcionario_id=$request->funcionario_id ?? $doc->funcionario_id;
-            $doc->localizacao_arquivo=$request->localizacao_arquivo;
-            $doc->status=$request->status;
-            return redirect()->back()->with("SUCESSO","DOCUMENTO CADASTRADO");
         }
+        $doc->tipo_documento=$request->tipo_documento;
+        $doc->descricao=$request->descricao;
+        $doc->data_criacao=$request->data_criacao;
+        $doc->funcionario_id=$request->funcionario_id ?? $doc->funcionario_id;
+        $doc->localizacao_arquivo=$request->localizacao_arquivo;
+        $doc->status=$request->status;
+        return redirect()->back()->with("Sucesso","DOCUMENTO CADASTRADO");
     }
 
     /**
@@ -45,7 +45,7 @@ class DocumentoController extends Controller
     {
         //
         $doc=Documento::find($id);
-        return view("pages.Documento",compact("doc"));
+        return view("pages.documento",compact("doc"));
     }
 
     /**
@@ -55,6 +55,6 @@ class DocumentoController extends Controller
     {
         //
         Documento::find($id)->delete;
-        return redirect()->back()->with("SUCESSO","DOCUMENTO ELIMINADO");
+        return redirect()->back()->with("Sucesso","DOCUMENTO ELIMINADO");
     }
 }

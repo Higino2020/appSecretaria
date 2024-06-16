@@ -14,7 +14,7 @@ class RecursoController extends Controller
     {
         //
         $valor= Recurso::all();
-        return view("pages.Recurso",compact("valor"));
+        return view("pages.recurso",compact("valor"));
     }
     /**
      * Store a newly created resource in storage.
@@ -27,13 +27,13 @@ class RecursoController extends Controller
             $valor= Recurso::find($request->id);
         }else{
             $valor= new Recurso();
-            $valor->nome_recurso=$request->nome_recurso;
-            $valor->tipo_recurso=$request->tipo_recurso;
-            $valor->descricao=$request->descricao;
-            $valor->localizacao=$request->localizacao;
-            $valor->status=$request->status;
-            return redirect()->back()->with("SUCESSO","RECURSO CADASTRADO");
         }
+        $valor->nome_recurso=$request->nome_recurso;
+        $valor->tipo_recurso=$request->tipo_recurso;
+        $valor->descricao=$request->descricao;
+        $valor->localizacao=$request->localizacao;
+        $valor->status=$request->status;
+        return redirect()->back()->with("Sucesso","RECURSO CADASTRADO");
     }
 
     /**
@@ -43,7 +43,7 @@ class RecursoController extends Controller
     {
         //
         $valor=Recurso::find($id);
-        return view("pages.Recurso",compact("valor"));
+        return view("pages.recurso",compact("valor"));
     }
 
     /**

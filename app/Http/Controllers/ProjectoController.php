@@ -14,7 +14,7 @@ class ProjectoController extends Controller
     {
         //
         $valor= Projecto::all();
-        return view("pages.Projecto",compact("valor"));
+        return view("pages.projecto",compact("valor"));
     }
     /**
      * Store a newly created resource in storage.
@@ -27,14 +27,14 @@ class ProjectoController extends Controller
             $valor= Projecto::find($request->id);
         }else{
             $valor= new Projecto();
-            $valor->nome_projeto=$request->nome_projeto;
-            $valor->descricao=$request->descricao;
-            $valor->data_inicio=$request->data_inicio;
-            $valor->data_termino=$request->data_termino;
-            $valor->status=$request->status;
-            $valor->responsavel=$request->responsavel ?? $valor->responsavel;
-            return redirect()->back()->with("SUCESSO","PROJECTO CADASTRADO");
         }
+        $valor->nome_projeto=$request->nome_projeto;
+        $valor->descricao=$request->descricao;
+        $valor->data_inicio=$request->data_inicio;
+        $valor->data_termino=$request->data_termino;
+        $valor->status=$request->status;
+        $valor->responsavel=$request->responsavel ?? $valor->responsavel;
+        return redirect()->back()->with("Sucesso","PROJECTO CADASTRADO");
     }
 
     /**
@@ -44,7 +44,7 @@ class ProjectoController extends Controller
     {
         //
         $valor=Projecto::find($id);
-        return view("pages.Projecto",compact("valor"));
+        return view("pages.projecto",compact("valor"));
     }
 
     /**

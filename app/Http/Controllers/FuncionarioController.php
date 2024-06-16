@@ -14,7 +14,7 @@ class FuncionarioController extends Controller
     {
         //
         $valor= Funcionario::all();
-        return view("pages.Funcionario",compact("valor"));
+        return view("pages.funcionario",compact("valor"));
     }
     /**
      * Store a newly created resource in storage.
@@ -27,16 +27,16 @@ class FuncionarioController extends Controller
             $valor= Funcionario::find($request->id);
         }else{
             $valor= new Funcionario();
-            $valor->nome=$request->nome;
-            $valor->sobrenome=$request->sobrenome;
-            $valor->cargo=$request->cargo;
-            $valor->departamento=$request->departamento;
-            $valor->telefone=$request->telefone;
-            $valor->email=$request->email;
-            $valor->data_contratacao=$request->data_contratacao;
-            $valor->user_id=$request->user_id ?? $valor->user_id;
-            return redirect()->back()->with("SUCESSO","FUNCIONARIO CADASTRADO");
         }
+        $valor->nome=$request->nome;
+        $valor->sobrenome=$request->sobrenome;
+        $valor->cargo=$request->cargo;
+        $valor->departamento=$request->departamento;
+        $valor->telefone=$request->telefone;
+        $valor->email=$request->email;
+        $valor->data_contratacao=$request->data_contratacao;
+        $valor->user_id=$request->user_id ?? $valor->user_id;
+        return redirect()->back()->with("Sucesso","FUNCIONARIO CADASTRADO");
     }
 
     /**
@@ -46,7 +46,7 @@ class FuncionarioController extends Controller
     {
         //
         $valor=Funcionario::find($id);
-        return view("pages.Funcionario",compact("valor"));
+        return view("pages.funcionario",compact("valor"));
     }
 
     /**

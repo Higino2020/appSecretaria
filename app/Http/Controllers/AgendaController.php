@@ -28,15 +28,15 @@ class AgendaController extends Controller
             $agenda= Agenda::find($request->id);
         }else{
             $agenda= new Agenda();
-            $agenda->data=$request->data;
-            $agenda->hora_inicio=$request->hora_inicio;
-            $agenda->hora_fim=$request->hora_fim;
-            $agenda->descricao_evento=$request->descricao_evento;
-            $agenda->local=$request->local;
-            $agenda->participante=$request->participante ?? $agenda->participante;
-            $agenda->tipo_evento=$request->tipo_evento;
-            return redirect()->back()->with("SUCESSO","AGENDA CADASTRADO");
         }
+        $agenda->data=$request->data;
+        $agenda->hora_inicio=$request->hora_inicio;
+        $agenda->hora_fim=$request->hora_fim;
+        $agenda->descricao_evento=$request->descricao_evento;
+        $agenda->local=$request->local;
+        $agenda->participante=$request->participante ?? $agenda->participante;
+        $agenda->tipo_evento=$request->tipo_evento;
+        return redirect()->back()->with("Sucesso","AGENDA CADASTRADO");
     }
 
     /**
@@ -56,6 +56,6 @@ class AgendaController extends Controller
     {
         //
         Agenda::find($id)->delete;
-        return redirect()->back()->with("SUCESSO","AGENDA ELIMINADO");
+        return redirect()->back()->with("Sucesso","AGENDA ELIMINADO");
     }
 }

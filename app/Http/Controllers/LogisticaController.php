@@ -11,7 +11,7 @@ class LogisticaController extends Controller
     {
         //
         $valor= Logistica::all();
-        return view("pages.Logistica",compact("valor"));
+        return view("pages.logistica",compact("valor"));
     }
     /**
      * Store a newly created resource in storage.
@@ -24,13 +24,13 @@ class LogisticaController extends Controller
             $valor= Logistica::find($request->id);
         }else{
             $valor= new Logistica();
-            $valor->nome_evento=$request->nome_evento;
-            $valor->data_evento=$request->data_evento;
-            $valor->local=$request->local;
-            $valor->descricao=$request->descricao;
-            $valor->responsavel=$request->responsavel ?? $valor->responsavel;
-            return redirect()->back()->with("SUCESSO","LOGISTICA CADASTRADO");
         }
+        $valor->nome_evento=$request->nome_evento;
+        $valor->data_evento=$request->data_evento;
+        $valor->local=$request->local;
+        $valor->descricao=$request->descricao;
+        $valor->responsavel=$request->responsavel ?? $valor->responsavel;
+        return redirect()->back()->with("Sucesso","LOGISTICA CADASTRADO");
     }
 
     /**
@@ -40,7 +40,7 @@ class LogisticaController extends Controller
     {
         //
         $valor=Logistica::find($id);
-        return view("pages.Logistica",compact("valor"));
+        return view("pages.logistica",compact("valor"));
     }
 
     /**

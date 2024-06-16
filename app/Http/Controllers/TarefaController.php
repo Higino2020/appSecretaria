@@ -14,7 +14,7 @@ class TarefaController extends Controller
     {
         //
         $valor= Tarefa::all();
-        return view("pages.Tarefa",compact("valor"));
+        return view("pages.tarefa",compact("valor"));
     }
     /**
      * Store a newly created resource in storage.
@@ -27,15 +27,15 @@ class TarefaController extends Controller
             $valor= Tarefa::find($request->id);
         }else{
             $valor= new Tarefa();
-            $valor->nome_tarefa=$request->nome_tarefa;
-            $valor->descricao=$request->descricao;
-            $valor->data_limite=$request->data_limite;
-            $valor->status=$request->status;
-            $valor->prioridade=$request->prioridade;
-            $valor->responsavel=$request->responsavel ?? $valor->responsavel;
-            $valor->projeto_id=$request->projeto_id ?? $valor->projeto_id;
-            return redirect()->back()->with("SUCESSO","TAREFA CADASTRADO");
         }
+        $valor->nome_tarefa=$request->nome_tarefa;
+        $valor->descricao=$request->descricao;
+        $valor->data_limite=$request->data_limite;
+        $valor->status=$request->status;
+        $valor->prioridade=$request->prioridade;
+        $valor->responsavel=$request->responsavel ?? $valor->responsavel;
+        $valor->projeto_id=$request->projeto_id ?? $valor->projeto_id;
+        return redirect()->back()->with("Sucesso","TAREFA CADASTRADO");
     }
 
     /**
@@ -45,7 +45,7 @@ class TarefaController extends Controller
     {
         //
         $valor=Tarefa::find($id);
-        return view("pages.Tarefa",compact("valor"));
+        return view("pages.tarefa",compact("valor"));
     }
 
     /**
@@ -55,6 +55,6 @@ class TarefaController extends Controller
     {
         //
         Tarefa::find($id)->delete;
-        return redirect()->back()->with("SUCESSO","TAREFA ELIMINADO");
+        return redirect()->back()->with("Sucesso","TAREFA ELIMINADO");
     }
 }

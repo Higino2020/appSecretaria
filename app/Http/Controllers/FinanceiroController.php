@@ -14,7 +14,7 @@ class FinanceiroController extends Controller
     {
         //
         $valor= Financeiro::all();
-        return view("pages.Financa",compact("valor"));
+        return view("pages.financa",compact("valor"));
     }
     /**
      * Store a newly created resource in storage.
@@ -27,14 +27,14 @@ class FinanceiroController extends Controller
             $valor= Financeiro::find($request->id);
         }else{
             $valor= new Financeiro();
-            $valor->tipo_transacao=$request->tipo_transacao;
-            $valor->data=$request->data;
-            $valor->valor=$request->valor;
-            $valor->descricao=$request->descricao;
-            $valor->categoria=$request->categoria;
-            $valor->responsavel=$request->responsavel ?? $valor->responsavel;
-            return redirect()->back()->with("SUCESSO","FINANCEIRO CADASTRADO");
         }
+        $valor->tipo_transacao=$request->tipo_transacao;
+        $valor->data=$request->data;
+        $valor->valor=$request->valor;
+        $valor->descricao=$request->descricao;
+        $valor->categoria=$request->categoria;
+        $valor->responsavel=$request->responsavel ?? $valor->responsavel;
+        return redirect()->back()->with("Sucesso","FINANCEIRO CADASTRADO");
     }
 
     /**
@@ -44,7 +44,7 @@ class FinanceiroController extends Controller
     {
         //
         $valor= Financeiro::find($id);
-        return view("pages.Financa",compact("valor"));
+        return view("pages.financa",compact("valor"));
     }
     /**
      * Remove the specified resource from storage.
