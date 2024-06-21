@@ -45,68 +45,68 @@
                           </a>
                       </li>
                       <li class=" ">
-                          <a href="" class="svg-icon">
+                          <a href="{{route('user.index')}}" class="svg-icon">
                             <i class="fa fa-user"></i>
                               <span class="ml-4">Utilizador</span>
                           </a>
                       </li>
                       <li class=" ">
-                        <a href="" class="svg-icon">
+                        <a href="{{route('funcio.index')}}" class="svg-icon">
                             <i class="fa fa-users"></i>
                               <span class="ml-4">Funcionario</span>
                           </a>
                       </li>
                       <li class=" ">
-                        <a href="" class="svg-icon">
+                        <a href="{{route('doc.index')}}" class="svg-icon">
                             <i class="fa fa-file"></i>
                               <span class="ml-4">Documentos</span>
                           </a>
                       </li>
                       <li class=" ">
-                        <a href="" class="svg-icon">
+                        <a href="{{route('agenda.index')}}" class="svg-icon">
                             <i class="fa fa-book"></i>
                               <span class="ml-4">Agendas</span>
                           </a>
                       </li>
                       <li class=" ">
-                        <a href="" class="svg-icon">
+                        <a href="{{route('corresp.index')}}" class="svg-icon">
                             <i class="fa fa-envelope"></i>
                               <span class="ml-4">Correspondecia</span>
                           </a>
                       </li>
                       <li class=" ">
-                        <a href="" class="svg-icon">
+                        <a href="{{route('visit.index')}}" class="svg-icon">
                             <i class="fa fa-male"></i>
                               <span class="ml-4">Visitante</span>
                           </a>
                       </li>
                      
                       <li class=" ">
-                        <a href="" class="svg-icon">
+                        <a href="{{route('project.index')}}" class="svg-icon">
                             <i class="fa fa-briefcase"></i>
                               <span class="ml-4">Projecto</span>
                           </a>
                       </li>
                       <li class=" ">
-                        <a href="" class="svg-icon">
+                        <a href="{{route('tarefas.index')}}" class="svg-icon">
                             <i class="fa fa-list-alt"></i>
                               <span class="ml-4">Tarefas</span>
                           </a>
                       </li>
                       <li class=" ">
-                        <a href="" class="svg-icon">
+                        <a href="{{route('recurso.index')}}" class="svg-icon">
                             <i class="fa fa-cogs"></i>
                               <span class="ml-4">Recursos</span>
                           </a>
                       </li>
                       <li class=" ">
-                        <a href="" class="svg-icon">
+                        <a href="{{route('financ.index')}}" class="svg-icon">
                             <i class="fa fa-money-bill"></i>
                               <span class="ml-4">Financeiro</span>
                           </a>
                       </li>
                       <li class=" ">
-                        <a href="" class="svg-icon">
+                        <a href="{{route('logist.index')}}" class="svg-icon">
                             <i class="fa fa-truck"></i>
                               <span class="ml-4">Logistica</span>
                           </a>
