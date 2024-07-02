@@ -34,6 +34,8 @@ class ProjectoController extends Controller
         $valor->data_termino=$request->data_termino;
         $valor->status=$request->status;
         $valor->responsavel=$request->responsavel ?? $valor->responsavel;
+        $valor->save();
+
         return redirect()->back()->with("Sucesso","PROJECTO CADASTRADO");
     }
 

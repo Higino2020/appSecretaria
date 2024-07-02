@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Funcionario;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FuncionarioController extends Controller
@@ -13,7 +14,7 @@ class FuncionarioController extends Controller
     public function index()
     {
         //
-        $valor= Funcionario::all();
+        $valor=Funcionario::orderBy('nome','asc')->get();
         return view("pages.funcionario",compact("valor"));
     }
     /**
@@ -26,7 +27,10 @@ class FuncionarioController extends Controller
         if(isset($request->id)){
             $valor= Funcionario::find($request->id);
         }else{
+
             $valor= new Funcionario();
+            $user  = User::cadastrar($request);
+            $valor->user_id=$user->id;
         }
         $valor->nome=$request->nome;
         $valor->sobrenome=$request->sobrenome;
@@ -35,7 +39,7 @@ class FuncionarioController extends Controller
         $valor->telefone=$request->telefone;
         $valor->email=$request->email;
         $valor->data_contratacao=$request->data_contratacao;
-        $valor->user_id=$request->user_id ?? $valor->user_id;
+        $valor->save();
         return redirect()->back()->with("Sucesso","FUNCIONARIO CADASTRADO");
     }
 
@@ -45,8 +49,8 @@ class FuncionarioController extends Controller
     public function show( $id)
     {
         //
-        $valor=Funcionario::find($id);
-        return view("pages.funcionario",compact("valor"));
+        Funcionario::find($id)->delete;
+        return redirect()->back()->with("Sucesso","FUNCIONARIO ELIMINADO");
     }
 
     /**
@@ -56,6 +60,6 @@ class FuncionarioController extends Controller
     {
         //
         Funcionario::find($id)->delete;
-        return redirect()->back()->with("SUCESSO","FUNCIONARIO ELIMINADO");
+        return redirect()->back()->with("Sucesso","FUNCIONARIO ELIMINADO");
     }
 }

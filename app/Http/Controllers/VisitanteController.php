@@ -35,6 +35,7 @@ class VisitanteController extends Controller
         $valor->hora_saida=$request->hora_saida;
         $valor->proposito_visita=$request->proposito_visita;
         $valor->responsavel=$request->responsavel ?? $valor->responsavel;
+        $valor->save();
         return redirect()->back()->with("Sucesso","VISITANTE CADASTRADO");
     }
 

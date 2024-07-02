@@ -34,6 +34,7 @@ class FinanceiroController extends Controller
         $valor->descricao=$request->descricao;
         $valor->categoria=$request->categoria;
         $valor->responsavel=$request->responsavel ?? $valor->responsavel;
+        $valor->save();
         return redirect()->back()->with("Sucesso","FINANCEIRO CADASTRADO");
     }
 

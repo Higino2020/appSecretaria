@@ -12,7 +12,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::get();
+        $user = User::where('tipo','<>','Admin')->get();
         return view('pages.utilizador', compact('user'));
     }
 

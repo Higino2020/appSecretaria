@@ -30,6 +30,8 @@ class LogisticaController extends Controller
         $valor->local=$request->local;
         $valor->descricao=$request->descricao;
         $valor->responsavel=$request->responsavel ?? $valor->responsavel;
+        $valor->save();
+
         return redirect()->back()->with("Sucesso","LOGISTICA CADASTRADO");
     }
 

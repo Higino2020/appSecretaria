@@ -16,12 +16,11 @@ use App\Http\Controllers\{
     VisitanteController
 };
 
-Route::group([],function(){
+Route::group(['middleware'=>'auth'],function(){
     
     Route::get('/', function () {
         return view('pages.index');
     });
-
     Route::resource('user',UserController::class);
     Route::resource('funcio',FuncionarioController::class);
     Route::resource('doc',DocumentoController::class);

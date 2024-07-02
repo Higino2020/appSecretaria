@@ -33,6 +33,7 @@ class RecursoController extends Controller
         $valor->descricao=$request->descricao;
         $valor->localizacao=$request->localizacao;
         $valor->status=$request->status;
+        $valor->save();
         return redirect()->back()->with("Sucesso","RECURSO CADASTRADO");
     }
 
