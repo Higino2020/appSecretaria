@@ -36,6 +36,7 @@ class AgendaController extends Controller
         $agenda->local=$request->local;
         $agenda->participante=$request->participante ?? $agenda->participante;
         $agenda->tipo_evento=$request->tipo_evento;
+        $agenda->save();
         return redirect()->back()->with("Sucesso","AGENDA CADASTRADO");
     }
 

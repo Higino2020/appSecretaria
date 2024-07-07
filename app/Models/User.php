@@ -52,24 +52,23 @@ class User extends Authenticatable
 
     public static function cadastrar(Request $request){
         $nomes = explode(' ',$request->name);
-        $tamanho = sizeof($nomes);
         $user = new User();
         $user->name = $request->nome;
         $user->email = $request->email;
         $user->tipo = "Funcionario";
-        $user->password = bcrypt($nomes[0]."secretaria2024");
+        $user->password = bcrypt("secretaria2024");
         $user->save();
         return $user;
     }
-    public static function cadastrarCliente(Request $request){
-        $user = new User();
-        $user->name = $request->nome;
-        $user->email = $request->email;
-        $user->tipo = "Cliente";
-        $user->password = bcrypt($request->password);
-        $user->save();
-        return $user;
-    }
+    // public static function cadastrarCliente(Request $request){
+    //     $user = new User();
+    //     $user->name = $request->nome;
+    //     $user->email = $request->email;
+    //     $user->tipo = "Cliente";
+    //     $user->password = bcrypt($request->password);
+    //     $user->save();
+    //     return $user;
+    // }
     public static function entrar(Request $request):bool{
         $user = User::where('email', $request->email)->first();
         if (! $user || ! Hash::check($request->password, $user->password)) {
@@ -83,6 +82,10 @@ class User extends Authenticatable
     public static function user(){
         $tipo = Auth::user()->tipo;
         return $tipo;
+    }
+
+    public function funcionario(){
+        return $this->hasOne(Funcionario::class,'user_id');
     }
 
     // public function cliente(){

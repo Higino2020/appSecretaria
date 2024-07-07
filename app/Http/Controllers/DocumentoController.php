@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Documento;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Plank\Mediable\Facades\MediaUploader;
 
 class DocumentoController extends Controller
 {
@@ -29,12 +31,21 @@ class DocumentoController extends Controller
         }else{
             $doc= new Documento();
         }
+        if(!isset($doc->localizacao_arquivo) ){
+            if (request()->hasFile('localizacao_arquivo')) {
+                $media = MediaUploader::fromSource(request()->file('localizacao_arquivo'))
+                    ->toDirectory('docEmpresa')->onDuplicateIncrement()
+                    ->useHashForFilename()
+                    ->setAllowedAggregateTypes(['doc','docx','pdf','xlsx','pptx'])->upload();
+                $doc->localizacao_arquivo = $media->basename;
+            }
+        }
         $doc->tipo_documento=$request->tipo_documento;
         $doc->descricao=$request->descricao;
-        $doc->data_criacao=$request->data_criacao;
-        $doc->funcionario_id=$request->funcionario_id ?? $doc->funcionario_id;
-        $doc->localizacao_arquivo=$request->localizacao_arquivo;
-        $doc->status=$request->status;
+        $doc->data_criacao=date('Y-m-d');
+        $doc->funcionario_id=Auth::user()->funcionario->id;
+        $doc->status="Enviado";
+        $doc->save();
         return redirect()->back()->with("Sucesso","DOCUMENTO CADASTRADO");
     }
 

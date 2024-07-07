@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Agenda extends Model
 {
     use HasFactory;
+    public function funcionario(){
+        return $this->belongsTo(Funcionario::class,'participante','id');
+    }
 }

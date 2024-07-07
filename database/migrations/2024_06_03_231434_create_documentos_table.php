@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('tipo_documento');
             $table->text('descricao')->nullable();
-            $table->date('data_criacao');
+            $table->date('data_criacao')->nullable();
             $table->foreignId('funcionario_id')->constrained('funcionarios');
-            $table->string('localizacao_arquivo');
-            $table->string('status');
+            $table->string('localizacao_arquivo')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

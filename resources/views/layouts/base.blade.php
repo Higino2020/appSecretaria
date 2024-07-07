@@ -11,6 +11,7 @@
       <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}" />
       <link rel="stylesheet" href="{{asset('css/backend-plugin.min.css')}}">
       <link rel="stylesheet" href="{{asset('css/backend.css')}}?v=1.0.0">
+      <link rel="stylesheet" href="{{asset('css/master.css')}}">
       <link rel="stylesheet" href="{{asset('vendor/@fortawesome/fontawesome-free/css/all.min.css')}}">
       <link rel="stylesheet" href="{{asset('vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css')}}">
       <link rel="stylesheet" href="{{asset('vendor/remixicon/fonts/remixicon.css')}}">  </head>

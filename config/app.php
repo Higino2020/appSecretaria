@@ -1,5 +1,6 @@
 <?php
-
+use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\ServiceProvider;
 return [
 
     /*
@@ -123,5 +124,10 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-
+    'driver' => \Intervention\Image\Drivers\Gd\Driver::class,
+    'options' => [
+        'autoOrientation' => true,
+        'decodeAnimation' => true,
+        'blendingColor' => 'ffffff',
+    ]
 ];
