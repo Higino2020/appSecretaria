@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>S. Secretaria</title>
+      <title>ISAAC NEWTON</title>
       
       <!-- Favicon -->
       <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}" />
@@ -28,8 +28,8 @@
       <!-- Menu da aplicação -->
       <div class="iq-sidebar  sidebar-default ">
           <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
-              <a href="backend/index.html" class="header-logo">
-                  <img src="{{asset('images/logo.png')}}" class="img-fluid rounded-normal light-logo" alt="logo"><h5 class="logo-title light-logo ml-3">POSDash</h5>
+              <a href="{{url('/')}}" class="header-logo">
+                  <img src="{{asset('images/logo.png')}}" class="img-fluid rounded-normal light-logo" alt="logo"><h5 class="logo-title light-logo ml-3">ISAAC NEWTON</h5>
               </a>
               <div class="iq-menu-bt-sidebar ml-0">
                   <i class="las la-bars wrapper-menu"></i>
@@ -39,7 +39,7 @@
               <nav class="iq-sidebar-menu">
                   <ul id="iq-sidebar-toggle" class="iq-menu">
                       <li class="active">
-                          <a href="backend/index.html" class="svg-icon">                        
+                          <a href="{{url('/')}}" class="svg-icon">                        
                               <svg  class="svg-icon" id="p-dash1" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                   <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line>
                               </svg>
@@ -124,9 +124,9 @@
               <nav class="navbar navbar-expand-lg navbar-light p-0">
                   <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                       <i class="ri-menu-line wrapper-menu"></i>
-                      <a href="backend/index.html" class="header-logo">
+                      <a href="{{url('/')}}" class="header-logo">
                           <img src="{{asset('images/logo.png')}}" class="img-fluid rounded-normal" alt="logo">
-                          <h5 class="logo-title ml-3">POSDash</h5>
+                          <h5 class="logo-title ml-3">ISAAC NEWTON</h5>
       
                       </a>
                   </div>
