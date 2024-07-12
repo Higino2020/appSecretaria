@@ -43,7 +43,7 @@ class DocumentoController extends Controller
         $doc->tipo_documento=$request->tipo_documento;
         $doc->descricao=$request->descricao;
         $doc->data_criacao=date('Y-m-d');
-        $doc->funcionario_id=Auth::user()->funcionario->id;
+        $doc->funcionario_id=Auth::user()->funcionario->id ?? null;
         $doc->status="Enviado";
         $doc->save();
         return redirect()->back()->with("Sucesso","DOCUMENTO CADASTRADO");
