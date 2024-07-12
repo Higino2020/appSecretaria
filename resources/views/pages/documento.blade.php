@@ -38,7 +38,7 @@
                             <tr>
                                 <td><a href="{{route('baixar',$dados->localizacao_arquivo)}}" class="text-danger" title="Clica para descarregar o fichero">  <i style="font-size:50px" class="fa fa-file-pdf"></i> </a></td>
                                 <td>{{$dados->tipo_documento}}</td>
-                                <td>{{$dados->funcionario->nome}}</td>
+                                <td>{{$dados->funcionario->nome??""}}</td>
                                 <td>{{$dados->descricao}}</td>
                                 <td>{{$dados->email}}</td>
                                 <td>
