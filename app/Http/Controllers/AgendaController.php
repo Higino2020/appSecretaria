@@ -56,7 +56,7 @@ class AgendaController extends Controller
     public function apagar( $id)
     {
         //
-        Agenda::find($id)->delete;
+        Agenda::find($id)->delete();
         return redirect()->back()->with("Sucesso","AGENDA ELIMINADO");
     }
 }
