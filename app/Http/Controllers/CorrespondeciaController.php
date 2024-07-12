@@ -34,6 +34,7 @@ class CorrespondeciaController extends Controller
         $valor->destinatario=$request->destinatario;
         $valor->assunto=$request->assunto;
         $valor->descricao=$request->descricao;
+        $valor->save();
         return redirect()->back()->with("Sucesso","CORRESPONDENCIA CADASTRADO");
     }
 

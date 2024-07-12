@@ -55,7 +55,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
                 <div class="modal-header">
-                        <h5 class="modal-title">Cadastrar Funcionários</h5>
+                        <h5 class="modal-title">Cadastrar Agendas</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -99,7 +99,7 @@
                             <label for="participante">Participante do Evento</label>
                             <div class="form-input">
                                 <select class="form-control" name="participante" id="participante">
-                                    @foreach (App\Models\Funcionario::where('id','<>',Auth::user()->funcionario->id)->orderBy('nome','ASC')->get() as $funcio)
+                                    @foreach (App\Models\Funcionario::orderBy('nome','ASC')->get() as $funcio)
                                         <option value="{{$funcio->id}}">{{$funcio->nome}}</option>
                                     @endforeach
                                 </select>

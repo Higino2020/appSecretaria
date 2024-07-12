@@ -36,7 +36,6 @@ class TarefaController extends Controller
         $valor->responsavel=$request->responsavel ?? $valor->responsavel;
         $valor->projeto_id=$request->projeto_id ?? $valor->projeto_id;
         $valor->save();
-
         return redirect()->back()->with("Sucesso","TAREFA CADASTRADO");
     }
 

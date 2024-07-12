@@ -36,7 +36,7 @@ class DocumentoController extends Controller
                 $media = MediaUploader::fromSource(request()->file('localizacao_arquivo'))
                     ->toDirectory('docEmpresa')->onDuplicateIncrement()
                     ->useHashForFilename()
-                    ->setAllowedAggregateTypes(['doc','docx','pdf','xlsx','pptx'])->upload();
+                    ->setAllowedExtensions(['doc','docx','pdf','xlsx','pptx','jpg','png','jpeg'])->upload();
                 $doc->localizacao_arquivo = $media->basename;
             }
         }
