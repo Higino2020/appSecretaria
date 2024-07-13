@@ -55,7 +55,7 @@ class ProjectoController extends Controller
     public function apagar( $id)
     {
         //
-        Projecto::find($id)->delete;
+        Projecto::find($id)->delete();
         return redirect()->back()->with("SUCESSO","PROJECTO ELIMINADO");
     }
 }

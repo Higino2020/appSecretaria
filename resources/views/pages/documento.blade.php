@@ -43,7 +43,7 @@
                                 <td>{{$dados->email}}</td>
                                 <td>
                                     <a href="#Cadastrar" data-toggle="modal" class="text-primary" onclick="editar({{$dados}})" ><i class="fa fa-edit"></i></a>
-                                    <a href="{{route('doc.show',$dados->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>
+                                    <a href="{{route('doc.apagar',$dados->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -77,7 +77,7 @@
                                 <input type="file" class="form-control" name="localizacao_arquivo" id="localizacao_arquivo">
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="tipo_documento">Tipo de Documento</label>
                             <div class="form-input">

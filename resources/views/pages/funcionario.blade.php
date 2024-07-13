@@ -44,7 +44,7 @@
                                 <td>{{$func->email}}</td>
                                 <td>
                                     <a href="#Cadastrar" data-toggle="modal" class="text-primary" onclick="editar({{$valor}})" ><i class="fa fa-edit"></i></a>
-                                    <a href="{{route('funcio.show',$func->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>
+                                    <a href="{{route('funcio.apagar',$func->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         @endforeach

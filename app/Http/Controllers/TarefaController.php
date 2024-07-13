@@ -55,7 +55,7 @@ class TarefaController extends Controller
     public function apagar( $id)
     {
         //
-        Tarefa::find($id)->delete;
+        Tarefa::find($id)->delete();
         return redirect()->back()->with("Sucesso","TAREFA ELIMINADO");
     }
 }

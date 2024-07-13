@@ -51,7 +51,7 @@ class LogisticaController extends Controller
     public function apagar( $id)
     {
         //
-        Logistica::find($id)->delete;
+        Logistica::find($id)->delete();
         return redirect()->back()->with("SUCESSO","LOGISTICA ELIMINADO");
     }
 }

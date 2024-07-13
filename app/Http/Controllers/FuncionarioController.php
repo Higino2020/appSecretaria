@@ -59,7 +59,7 @@ class FuncionarioController extends Controller
     public function apagar( $id)
     {
         //
-        Funcionario::find($id)->delete;
+        Funcionario::find($id)->delete();
         return redirect()->back()->with("Sucesso","FUNCIONARIO ELIMINADO");
     }
 }

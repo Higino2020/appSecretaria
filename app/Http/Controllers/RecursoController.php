@@ -53,7 +53,7 @@ class RecursoController extends Controller
     public function apagar( $id)
     {
         //
-        Recurso::find($id)->delete;
+        Recurso::find($id)->delete();
         return redirect()->back()->with("SUCESSO","RECURSO ELIMINADO");
     }
 }

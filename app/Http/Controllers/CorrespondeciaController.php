@@ -54,7 +54,7 @@ class CorrespondeciaController extends Controller
     public function apagar( $id)
     {
         //
-        Correspondecia::find($id)->delete;
-        return redirect()->back()->with("Sucesso","CORRESPONDENCIA ELIMINADO");
+        Correspondecia::find($id)->delete();
+        return redirect()->back()->with("Sucesso","CORRESPONDÊNÇIA ELIMINADO");
     }
 }

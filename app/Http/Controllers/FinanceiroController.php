@@ -53,7 +53,8 @@ class FinanceiroController extends Controller
     public function apagar( $id)
     {
         //
-        Financeiro::find($id)->delete;
+        Financeiro::find($id)->delete();
         return redirect()->back()->with("SUCESSO","FINANCEIRO ELIMINADO");
+
     }
 }

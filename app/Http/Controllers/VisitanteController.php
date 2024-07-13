@@ -55,7 +55,7 @@ class VisitanteController extends Controller
     public function apagar( $id)
     {
         //
-        Visitante::find($id)->delete;
+        Visitante::find($id)->delete();
         return redirect()->back()->with("Sucesso","VISITANTE ELIMINADO");
     }
 }

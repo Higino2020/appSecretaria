@@ -65,7 +65,7 @@ class DocumentoController extends Controller
     public function apagar( $id)
     {
         //
-        Documento::find($id)->delete;
+        Documento::find($id)->delete();
         return redirect()->back()->with("Sucesso","DOCUMENTO ELIMINADO");
     }
 }
