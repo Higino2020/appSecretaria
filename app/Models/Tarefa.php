@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Tarefa extends Model
 {
     use HasFactory;
+    public function funcionario(){
+        return $this->belongsTo(Funcionario::class);
+    }
+    public function projecto(){
+        return $this->belongsTo(Projecto::class);
+    }
 }

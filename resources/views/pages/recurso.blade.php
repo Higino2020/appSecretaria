@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <div class="header-title" style="display: flex; justify-content: space-between; width: 100%">
-                    <h4 class="card-title">Correspondênçia da Empresa</h4>
+                    <h4 class="card-title">Recursos da Escola</h4>
                     <a href="#Cadastrar" data-toggle="modal" style="font-size: 20pt"><i class="fa fa-plus-circle"></i></a>
                 </div>
             </div>
@@ -26,27 +26,25 @@
                     <table id="datatable" class="table data-tables table-striped">
                     <thead>
                         <tr class="ligth">
-                            <th>Tipo</th>
-                            <th>Assunto</th>
+                            <th>Nome do recursoo</th>
                             <th>Descrição</th>
-                            <th>Remetente</th>
-                            <th>Data</th>
-                            <th>Destinatário</th>
+                            <th>Tipo de Recursos</th>
+                            <th>Localização</th>
+                            <th>Estado</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($valor as $dados)
                             <tr>
-                                <td>{{$dados->tipo}}</td>
-                                <td>{{$dados->assunto}}</td>
+                                <td>{{$dados->nome_recurso}}</td>
                                 <td>{{$dados->descricao}}</td>
-                                <td>{{$dados->remetente}}</td>
-                                <td>{{$dados->data}}</td>
-                                <td>{{$dados->funcionario->nome??""}}</td>
+                                <td>{{$dados->tipo_recurso}}</td>
+                                <td>{{$dados->localizacao}}</td>
+                                <td>{{$dados->status}}</td>
                                 <td>
                                     <a href="#Cadastrar" data-toggle="modal" class="text-primary" onclick="editar({{$dados}})" ><i class="fa fa-edit"></i></a>
-                                    <a href="{{route('corresp.show',$dados->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>
+                                    <a href="{{route('recurso.show',$dados->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -64,29 +62,21 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
                 <div class="modal-header">
-                        <h5 class="modal-title">Cadastrar Correspondênçia</h5>
+                        <h5 class="modal-title">Cadastrar Recurso</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                     </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                   <form action="{{route('corresp.store')}}" method="post" enctype="multipart/form-data">
+                   <form action="{{route('recurso.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                          <input type="hidden" name="id" id="id">
+
                         <div class="form-group">
-                            <label for="tipo">Tipo</label>
+                            <label for="nome_recurso">Nome do Recurso</label>
                             <div class="form-input">
-                                <select name="tipo" id="tipo" class="form-control">
-                                    <option value="Interna">Interna</option>
-                                    <option value="Externa">Externa</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="assunto">Assunto</label>
-                            <div class="form-input">
-                                <input type="text" name="assunto" id="assunto" class="form-control" />
+                                <input type="text" name="nome_recurso" id="nome_recurso" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -96,24 +86,31 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="remetente">Remetente</label>
                             <div class="form-input">
-                                <input type="text" name="remetente" id="remetente"  class="form-control" />
+                                <label for="localizacao">Localização</label>
+                            </div>
+                            <input type="text"  class="form-control" name="localizacao" id="localizacao">
+                        </div>
+                        <div class="form-group">
+                            <label for="tipo_recurso">Tipo de Recurso</label>
+                            <div class="form-input">
+                                <select name="tipo_recurso" id="tipo_recurso" class="form-control">
+                                    <option value="R.H">R.H</option>
+                                    <option value="Finança">Finança</option>
+                                    <option value="Físicos">Físicos</option>
+                                    <option value="Materias e Didáticos">Materias e Didaticos</option>
+                                    <option value="Pedagógicos">Pedagógicos</option>
+                                    <option value="Tecnológicos">Tecnológicos</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="data">Data</label>
+                            <label for="status">Estado</label>
                             <div class="form-input">
-                                <input type="date" min="{{date('Y-m-d')}}" class="form-control" name="data" id="data">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="destinatario">Destinatário</label>
-                            <div class="form-input">
-                                <select class="form-control" name="destinatario" id="destinatario">
-                                    @foreach (App\Models\Funcionario::orderBy('nome','ASC')->get() as $funcio)
-                                        <option value="{{$funcio->id}}">{{$funcio->nome}}</option>
-                                    @endforeach
+                                <select name="status" id="status" class="form-control">
+                                    <option value="Activo">Activo</option>
+                                    <option value="Não Activo">Não Activo</option>
+                                    <option value="Pendente">Pendente</option>
                                 </select>
                             </div>
                         </div>
@@ -131,21 +128,19 @@
 <script>
     function editar(valor) {
         document.getElementById('id').value = valor.id;
-        document.getElementById('tipo').value = valor.tipo;
-        document.getElementById('assunto').value = valor.assunto;
+        document.getElementById('nome_recurso').value = valor.nome_recurso;
         document.getElementById('descricao').value = valor.descricao;
-        document.getElementById('remetente').value = valor.remetente;
-        document.getElementById('data').value = valor.data;
-        document.getElementById('destinatario').value = valor.destinatario;
+        document.getElementById('tipo_recurso').value = valor.tipo_recurso;
+        document.getElementById('localizacao').value = valor.localizacao;
+        document.getElementById('status').value = valor.status;
     }
     function limpar() {
         document.getElementById('id').value = "";
-        document.getElementById('tipo').value = "";
-        document.getElementById('assunto').value = "";
+        document.getElementById('nome_recurso').value = "";
         document.getElementById('descricao').value = "";
-        document.getElementById('remetente').value = "";
-        document.getElementById('data').value = "";
-        document.getElementById('destinatario').value = "";
+        document.getElementById('tipo_recurso').value = "";
+        document.getElementById('localizacao').value = "";
+        document.getElementById('status').value = "";
     }
 </script>
 @endsection

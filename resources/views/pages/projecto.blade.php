@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <div class="header-title" style="display: flex; justify-content: space-between; width: 100%">
-                    <h4 class="card-title">Visitantes da Escola</h4>
+                    <h4 class="card-title">Projecto da Escola</h4>
                     <a href="#Cadastrar" data-toggle="modal" style="font-size: 20pt"><i class="fa fa-plus-circle"></i></a>
                 </div>
             </div>
@@ -26,12 +26,11 @@
                     <table id="datatable" class="table data-tables table-striped">
                     <thead>
                         <tr class="ligth">
-                            <th>Nome</th>
-                            <th>Empresa Organizadora</th>
-                            <th>Data da Visita</th>
-                            <th>Hora de Entrada</th>
-                            <th>Hora de Saída</th>
-                            <th>Proposito da Visita</th>
+                            <th>Nome do Projecto</th>
+                            <th>Descrição</th>
+                            <th>Data de Inicio</th>
+                            <th>Data de Termino</th>
+                            <th>Estado</th>
                             <th>Responsável</th>
                             <th></th>
                         </tr>
@@ -39,16 +38,15 @@
                     <tbody>
                         @foreach ($valor as $dados)
                             <tr>
-                                <td>{{$dados->nome}}</td>
-                                <td>{{$dados->empresa_organizacao}}</td>
-                                <td>{{$dados->data_visita}}</td>
-                                <td>{{$dados->hora_entrada}}</td>
-                                <td>{{$dados->hora_saida}}</td>
-                                <td>{{$dados->proposito_visita}}</td>
+                                <td>{{$dados->nome_projeto}}</td>
+                                <td>{{$dados->descricao}}</td>
+                                <td>{{$dados->data_inicio}}</td>
+                                <td>{{$dados->data_termino}}</td>
+                                <td>{{$dados->status}}</td>
                                 <td>{{$dados->responsavel}}</td>
                                 <td>
                                     <a href="#Cadastrar" data-toggle="modal" class="text-primary" onclick="editar({{$dados}})" ><i class="fa fa-edit"></i></a>
-                                    <a href="{{route('visit.show',$dados->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>
+                                    <a href="{{route('project.show',$dados->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -66,56 +64,53 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
                 <div class="modal-header">
-                        <h5 class="modal-title">Cadastrar Vistantes</h5>
+                        <h5 class="modal-title">Cadastrar Projecto</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                     </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                   <form action="{{route('visit.store')}}" method="post" enctype="multipart/form-data">
+                   <form action="{{route('project.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                          <input type="hidden" name="id" id="id">
 
                         <div class="form-group">
-                            <label for="nome">Nome</label>
+                            <label for="nome_projeto">Nome do Projecto</label>
                             <div class="form-input">
-                                <input type="text" name="nome" id="nome" class="form-control" />
+                                <input type="text" name="nome_projeto" id="nome_projeto" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="empresa_organizacao">Empresa da Organização</label>
+                            <label for="descricao">Descrição</label>
                             <div class="form-input">
-                                <input type="text" name="empresa_organizacao" id="empresa_organizacao" class="form-control" />
+                                <textarea name="descricao" id="descricao" style="resize: none" class="form-control" cols="30" rows="4"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="data_visita">Data da Visita</label>
+                            <label for="data_inicio">Data de Inicio</label>
                             <div class="form-input">
-                                <input type="date" min="{{date('Y-m-d')}}" class="form-control" name="data_visita" id="data_visita">
+                                <input type="date" min="{{date('Y-m-d')}}" class="form-control" name="data_inicio" id="data_inicio">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="hora_entrada">Hora de Entrada</label>
+                            <label for="data_termino">Data de Termino</label>
                             <div class="form-input">
-                                <input type="time" class="form-control" name="hora_entrada" id="hora_entrada">
+                                <input type="date" min="{{date('Y-m-d')}}" class="form-control" name="data_termino" id="data_termino">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="hora_saida">Hora de Saída</label>
+                            <label for="status">Estado</label>
                             <div class="form-input">
-                                <input type="time" class="form-control" name="hora_saida" id="hora_saida">
+                                <select name="status" id="status" class="form-control">
+                                    <option value="Activo">Activo</option>
+                                    <option value="Não Activo">Não Activo</option>
+                                    <option value="Pendente">Pendente</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="proposito_visita">Proposito da Visita</label>
-                            <div class="form-input">
-                                <input type="text" name="proposito_visita" id="proposito_visita"  class="form-control" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="responsavel">Responsavel da Visita</label>
+                            <label for="responsavel">Responsavel do Projecto</label>
                             <div class="form-input">
                                 <select class="form-control" name="responsavel" id="responsavel">
                                     @foreach (App\Models\Funcionario::orderBy('nome','ASC')->get() as $funcio)
@@ -138,22 +133,20 @@
 <script>
     function editar(valor) {
         document.getElementById('id').value = valor.id;
-        document.getElementById('nome').value = valor.nome;
-        document.getElementById('empresa_organizacao').value = valor.empresa_organizacao;
-        document.getElementById('data_visita').value = valor.data_visita;
-        document.getElementById('hora_entrada').value = valor.hora_entrada;
-        document.getElementById('hora_saida').value = valor.hora_saida;
-        document.getElementById('proposito_visita').value = valor.proposito_visita;
+        document.getElementById('nome_projeto').value = valor.nome_projeto;
+        document.getElementById('descricao').value = valor.descricao;
+        document.getElementById('data_inicio').value = valor.data_inicio;
+        document.getElementById('data_termino').value = valor.data_termino;
+        document.getElementById('status').value = valor.status;
         document.getElementById('responsavel').value = valor.responsavel;
     }
     function limpar() {
         document.getElementById('id').value = "";
-        document.getElementById('nome').value = "";
-        document.getElementById('empresa_organizacao').value = "";
-        document.getElementById('data_visita').value = "";
-        document.getElementById('hora_entrada').value = "";
-        document.getElementById('hora_saida').value = "";
-        document.getElementById('proposito_visita').value = "";
+        document.getElementById('nome_projeto').value = "";
+        document.getElementById('descricao').value = "";
+        document.getElementById('data_inicio').value = "";
+        document.getElementById('data_termino').value = "";
+        document.getElementById('status').value = "";
         document.getElementById('responsavel').value = "";
     }
 </script>
