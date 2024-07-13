@@ -14,7 +14,7 @@ class FinanceiroController extends Controller
     {
         //
         $valor= Financeiro::all();
-        return view("pages.financa",compact("valor"));
+        return view("pages.financeiro",compact("valor"));
     }
     /**
      * Store a newly created resource in storage.
@@ -45,7 +45,7 @@ class FinanceiroController extends Controller
     {
         //
         $valor= Financeiro::find($id);
-        return view("pages.financa",compact("valor"));
+        return view("pages.financeiro",compact("valor"));
     }
     /**
      * Remove the specified resource from storage.
