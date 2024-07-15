@@ -43,7 +43,7 @@
                                 <td>{{$dados->data_inicio}}</td>
                                 <td>{{$dados->data_termino}}</td>
                                 <td>{{$dados->status}}</td>
-                                <td>{{$dados->responsavel}}</td>
+                                <td>{{$dados->funcionario->nome}}</td>
                                 <td>
                                     <a href="#Cadastrar" data-toggle="modal" class="text-primary" onclick="editar({{$dados}})" ><i class="fa fa-edit"></i></a>
                                     <a href="{{route('project.apagar',$dados->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>

@@ -38,7 +38,7 @@
                             <tr>
                                 <td><a href="{{route('baixar',$dados->localizacao_arquivo)}}" class="text-danger" title="Clica para descarregar o fichero">  <i style="font-size:50px" class="fa fa-file-pdf"></i> </a></td>
                                 <td>{{$dados->tipo_documento}}</td>
-                                <td>{{$dados->funcionario->nome??""}}</td>
+                                <td>{{$dados->funcionario->nome}}</td>
                                 <td>{{$dados->descricao}}</td>
                                 <td>{{$dados->email}}</td>
                                 <td>
@@ -70,7 +70,8 @@
                 <div class="container-fluid">
                    <form action="{{route('doc.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
-                         <input type="hidden" name="id" id="id">
+                        <input type="hidden" name="id" id="id">
+                        <input type="hidden" name="funcionario_id" value="{{ Auth::user()->id }}">
                         <div class="form-group">
                             <label for="localizacao_arquivo">Carregue o fichero que deseja salvar</label>
                             <div class="form-input">
@@ -90,6 +91,7 @@
                                 <textarea name="descricao" id="descricao" style="resize: none" class="form-control" cols="30" rows="4"></textarea>
                             </div>
                         </div>
+                        
                 </div>
             </div>
             <div class="modal-footer">

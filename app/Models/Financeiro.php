@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Financeiro extends Model
 {
     use HasFactory;
+    public function funcionario(){
+        return $this->belongsTo(Funcionario::class,'responsavel','id');
+    }
 }

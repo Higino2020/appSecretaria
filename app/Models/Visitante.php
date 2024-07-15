@@ -9,6 +9,6 @@ class Visitante extends Model
 {
     use HasFactory;
     public function funcionario(){
-        return $this->belongsTo(Funcionario::class);
+        return $this->belongsTo(Funcionario::class,'responsavel','id');
     }
 }

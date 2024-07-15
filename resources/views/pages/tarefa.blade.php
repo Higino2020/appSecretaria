@@ -44,8 +44,8 @@
                                 <td>{{$dados->data_limite}}</td>
                                 <td>{{$dados->prioridade}}</td>
                                 <td>{{$dados->status}}</td>
-                                <td>{{$dados->projeto_id}}</td>
-                                <td>{{$dados->responsavel}}</td>
+                                <td>{{$dados->projecto->nome_projecto}}</td>
+                                <td>{{$dados->funcionario->nome}}</td>
                                 <td>
                                     <a href="#Cadastrar" data-toggle="modal" class="text-primary" onclick="editar({{$dados}})" ><i class="fa fa-edit"></i></a>
                                     <a href="{{route('tarefas.apagar',$dados->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>
