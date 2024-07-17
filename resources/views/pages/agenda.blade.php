@@ -151,7 +151,7 @@
         document.getElementById('participante').value = "";
         document.getElementById('data_contratacao').value = "";
     }
-    
+
 </script>
 
  <div class="modal fade" id="Agenda" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -159,7 +159,7 @@
         <div class="modal-content">
                 <div class="modal-header">
                         <h5 class="modal-title">
-                            Enveto -  <span id="titulo"></span>
+                            Evento -  <span id="titulo"></span>
                         </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -181,13 +181,13 @@
         </div>
     </div>
  </div>
- 
+
  <script>
     $('#exampleModal').on('show.bs.modal', event => {
         var button = $(event.relatedTarget);
         var modal = $(this);
         // Use above variables to manipulate the DOM
-        
+
     });
  </script>
 @endsection

@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <div class="header-title" style="display: flex; justify-content: space-between; width: 100%">
-                    <h4 class="card-title">Documentos da Empresa</h4>
+                    <h4 class="card-title">Documentos da Escola </h4>
                     <a href="#Cadastrar" data-toggle="modal" style="font-size: 20pt"><i class="fa fa-plus-circle"></i></a>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                             <tr>
                                 <td><a href="{{route('baixar',$dados->localizacao_arquivo)}}" class="text-danger" title="Clica para descarregar o fichero">  <i style="font-size:50px" class="fa fa-file-pdf"></i> </a></td>
                                 <td>{{$dados->tipo_documento}}</td>
-                                <td>{{$dados->funcionario->nome}}</td>
+                                <td>{{$dados->funcionario->nome?? ''}}</td>
                                 <td>{{$dados->descricao}}</td>
                                 <td>{{$dados->email}}</td>
                                 <td>
@@ -91,7 +91,7 @@
                                 <textarea name="descricao" id="descricao" style="resize: none" class="form-control" cols="30" rows="4"></textarea>
                             </div>
                         </div>
-                        
+
                 </div>
             </div>
             <div class="modal-footer">

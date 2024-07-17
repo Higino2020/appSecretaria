@@ -43,7 +43,6 @@
                                 <td>{{$dados->descricao}}</td>
                                 <td>{{$dados->remetente}}</td>
                                 <td>{{$dados->data}}</td>
-                                <td>{{$dados->funcionario->nome}}</td>
                                 <td>
                                     <a href="#Cadastrar" data-toggle="modal" class="text-primary" onclick="editar({{$dados}})" ><i class="fa fa-edit"></i></a>
                                     <a href="{{route('corresp.apagar',$dados->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>

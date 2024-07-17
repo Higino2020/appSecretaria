@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('tipo_documento');
             $table->text('descricao')->nullable();
             $table->date('data_criacao')->nullable();
-            $table->foreignId('funcionario_id')->constrained('funcionarios')->nullable();
+            $table->foreignId('funcionario_id')->constrained('funcionarios');
             $table->string('localizacao_arquivo')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
