@@ -13,9 +13,8 @@ use App\Http\Controllers\{
     DocumentoController,
     FinanceiroController,
     FuncionarioController,
-    LogisticaController,
     ProjectoController,
-    RecursoController,
+    EstudanteController,
     TarefaController,
     UserController,
     VisitanteController
@@ -42,12 +41,10 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('apager/{id}/project',[ProjectoController::class,'apagar'])->name('project.apagar');
     Route::resource('tarefas',TarefaController::class);
     Route::get('apager/{id}/tarefas',[TarefaController::class,'apagar'])->name('tarefas.apagar');
-    Route::resource('recurso',RecursoController::class);
-    Route::get('apager/{id}/recurso',[RecursoController::class,'apagar'])->name('recurso.apagar');
     Route::resource('financ',FinanceiroController::class);
     Route::get('apager/{id}/financ',[FinanceiroController::class,'apagar'])->name('financ.apagar');
-    Route::resource('logist',LogisticaController::class);
-    Route::get('apager/{id}/logist',[LogisticaController::class,'apagar'])->name('logist.apagar');
+    Route::resource('student',EstudanteController::class);
+    Route::get('apager/{id}/student',[EstudanteController::class,'apagar'])->name('student.apagar');
 
     Route::get('getfile/{nome}',function($name){
         $path = '';

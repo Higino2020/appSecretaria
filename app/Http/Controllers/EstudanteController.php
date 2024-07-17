@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\estudante;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Plank\Mediable\Facades\MediaUploader;
 
 class EstudanteController extends Controller
@@ -15,7 +16,7 @@ class EstudanteController extends Controller
     {
         //
         $student= estudante::all();
-        return view('pages.estudante',compact('student'));
+        return view("pages.estudante",compact("student"));
     }
     /**
      * Store a newly created resource in storage.
@@ -49,52 +50,37 @@ class EstudanteController extends Controller
                 ->setAllowedExtensions(['doc','docx','pdf','xlsx','pptx','jpg','png','jpeg'])->upload();
                 $student->certificado=$doc->basename;
             }
-        } 
+        }
         $student->nome=$request->nome;
-        $student->sobrenome=$request->sobrenome;
+        $student->genero=$request->genero;
         $student->n_bilhete=$request->n_bilhete;
         $student->telefone=$request->telefone;
         $student->bilhete=$request->bilhete;
-        $student->gmail=$request->gmail;
         $student->certificado=$request->certificado;
-        $student->curso=$request->curso;
         $student->matricula=$request->matricula;
         $student->ano_academico=$request->ano_academico;
-        $student->status=$request->status;
-        $student->funcionario_id=$request->funcionario_id;
+        $student->data=date("Y-m-d");
+        $student->status="Enviado";
+        $student->funcionario_id=Auth::user()->funcionario->id;
         $student->save();
-        return redirect()->back()->with('SUCESSO','ESTUDANTE CADASTRADO');
+        return redirect()->back()->with("SUCESSO","ESTUDANTE CADASTRADO");
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(estudante $estudante)
+    public function show( $id)
     {
         //
+        $student= estudante::find($id);
+        return view("page.estudante",compact("student"));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(estudante $estudante)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, estudante $estudante)
-    {
-        //
-    }
-
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(estudante $estudante)
+    public function apagar($id)
     {
-        //
+        estudante::find($id)->delete();
+        return redirect()->back()->with("SUCESSO","ESTUDANTE ELIMINADO");
     }
 }

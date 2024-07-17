@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <div class="header-title" style="display: flex; justify-content: space-between; width: 100%">
-                    <h4 class="card-title">Logistica da Escola</h4>
+                    <h4 class="card-title">Estudantes</h4>
                     <a href="#Cadastrar" data-toggle="modal" style="font-size: 20pt"><i class="fa fa-plus-circle"></i></a>
                 </div>
             </div>
@@ -26,25 +26,34 @@
                     <table id="datatable" class="table data-tables table-striped">
                     <thead>
                         <tr class="ligth">
-                            <th>Nome do Evento</th>
+                            <th>Certificado</th>
+                            <th>Bilhete</th>
+                            <th>Nome Completo</th>
+                            <th>Genero</th>
+                            <th>Nº BI</th>
+                            <th>Nº Telefone</th>
+                            <th>Matrícula</th>
+                            <th>Ano Academico</th>
                             <th>Data</th>
-                            <th>Local</th>
-                            <th>Descrição</th>
-                            <th>Responsavel</th>
-                            <th></th>
+                            <th>Responsável</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($valor as $dados)
+                        @foreach ($student as $dados)
                             <tr>
-                                <td>{{$dados->nome_evento}}</td>
-                                <td>{{$dados->data_evento}}</td>
-                                <td>{{$dados->local}}</td>
-                                <td>{{$dados->descricao}}</td>
+                                <td><a href="{{route('baixar',$dados->bilhete)}}" class="text-danger" title="Clica para descarregar o fichero">  <i style="font-size:50px" class="fa fa-file-pdf"></i> </a></td>
+                                <td><a href="{{route('baixar',$dados->certificado)}}" class="text-danger" title="Clica para descarregar o fichero">  <i style="font-size:50px" class="fa fa-file-pdf"></i> </a></td>
+                                <td>{{$dados->nome}}</td>
+                                <td>{{$dados->genero}}</td>
+                                <td>{{$dados->n_bilhete}}</td>
+                                <td>{{$dados->telefone}}</td>
+                                <td>{{$dados->matricula}}</td>
+                                <td>{{$dados->ano_academico}}</td>
+                                <td>{{$dados->data}}</td>
                                 <td>{{$dados->funcionario->nome}}</td>
                                 <td>
                                     <a href="#Cadastrar" data-toggle="modal" class="text-primary" onclick="editar({{$dados}})" ><i class="fa fa-edit"></i></a>
-                                    <a href="{{route('logist.apagar',$dados->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>
+                                    <a href="{{route('student.apagar',$dados->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -62,49 +71,67 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
                 <div class="modal-header">
-                        <h5 class="modal-title">Cadastrar Logistica</h5>
+                        <h5 class="modal-title">Cadastrar Estudante</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                     </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                   <form action="{{route('logist.store')}}" method="post" enctype="multipart/form-data">
+                   <form action="{{route('student.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                          <input type="hidden" name="id" id="id">
+                         <input type="hidden" name="funcionario_id" value="{{ Auth::user()->id }}">
                          <div class="form-group">
-                            <label for="nome_evento">Nome do Evento</label>
+                            <label for="nome">Nome Completo</label>
                             <div class="form-input">
-                                <input type="text" name="nome_evento" id="nome_evento" class="form-control" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="local">Local</label>
-                            <div class="form-input">
-                                <input type="text" name="local" id="local" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="descricao">Descrição</label>
-                            <div class="form-input">
-                                <textarea name="descricao" id="descricao" style="resize: none" class="form-control" cols="30" rows="4"></textarea>
+                                <input type="text" name="nome" id="nome" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="form-input">
-                                <label for="data_evento">Data do Evento</label>
-                            </div>
-                            <input type="date" min="{{date('Y-m-d')}}" class="form-control" name="data_evento" id="data_evento">
-                        </div>
-                        <div class="form-group">
-                            <label for="responsavel">Responsavel</label>
-                            <div class="form-input">
-                                <select class="form-control" name="responsavel" id="responsavel">
-                                    @foreach (App\Models\Funcionario::orderBy('nome','ASC')->get() as $funcio)
-                                        <option value="{{$funcio->id}}">{{$funcio->nome}}</option>
-                                    @endforeach
+                                <select name="genero" id="genero" class="form-control">
+                                    <option value="">Selecionar o Genero</option>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Femenino">Femenino</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="n_bilhete">Nº do Bilhete</label>
+                            <div class="form-input">
+                                <input type="text" name="n_bilhete" id="n_bilhete" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">Nº do Pai</label>
+                            <div class="form-input">
+                                <input type="text" name="telefone" id="telefone" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="certificado">Certificado</label>
+                            <div class="form-input">
+                                <input type="file" name="certificado" id="certificado" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="bilhete">Bilhete</label>
+                            <div class="form-input">
+                                <input type="file" name="bilhete" id="bilhete" class="form-control" />
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="matricula">Nº de Matrícula</label>
+                            <div class="form-input">
+                                <input type="text" name="matricula" id="matricula" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ano_academico">Ano Académico</label>
+                            <div class="form-input">
+                                <input name="ano_academico" id="ano_academico" style="text" class="form-control" />
                             </div>
                         </div>
                 </div>
@@ -121,19 +148,25 @@
 <script>
     function editar(valor) {
         document.getElementById('id').value = valor.id;
-        document.getElementById('nome_evento').value = valor.nome_evento;
-        document.getElementById('local').value = valor.local;
-        document.getElementById('data_evento').value = valor.data_evento;
-        document.getElementById('descricao').value = valor.descricao;
-        document.getElementById('responsavel').value = valor.responsavel;
+        document.getElementById('nome').value = valor.nome;
+        document.getElementById('genero').value = valor.genero;
+        document.getElementById('n_bilhete').value = valor.n_bilhete;
+        document.getElementById('telefone').value = valor.telefone;
+        document.getElementById('certificado').value = valor.certificado;
+        document.getElementById('bilhete').value = valor.bilhete;
+        document.getElementById('matricula').value = valor.matricula;
+        document.getElementById('ano_academico').value = valor.ano_academico;
     }
     function limpar() {
         document.getElementById('id').value = "";
-        document.getElementById('nome_evento').value = "";
-        document.getElementById('local').value = "";
-        document.getElementById('data_evento').value = "";
-        document.getElementById('descricao').value = "";
-        document.getElementById('responsavel').value = "";
-    }
+        document.getElementById('nome').value = "";
+        document.getElementById('genero').value = "";
+        document.getElementById('n_bilhete').value = "";
+        document.getElementById('telefone').value = ""
+        document.getElementById('certificado').value = "";
+        document.getElementById('bilhete').value = "";
+        document.getElementById('matricula').value = "";
+        document.getElementById('ano_academico').value = "";
+        }
 </script>
 @endsection

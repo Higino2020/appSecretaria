@@ -14,18 +14,16 @@ return new class extends Migration
         Schema::create('estudantes', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->string('sobrenome');
-            $table->string('n_bilhete')->unique();
+            $table->string('genero');
+            $table->string('n_bilhete')->nullable();
             $table->string('telefone')->unique();
-            $table->string('bilhete');
-            $table->string('gmail');
-            $table->string('certificado');
-            $table->string('curso')->unique();
+            $table->string('bilhete')->nullable();
+            $table->string('certificado')->nullable();
             $table->string('matricula')->unique();
             $table->string('ano_academico');
-            $table->foreignId('funcionario_id')->constrained('funcionarios');
             $table->string('data');
             $table->string('status')->nullable();
+            $table->foreignId('funcionario_id')->constrained('funcionarios');
             $table->timestamps();
         });
     }

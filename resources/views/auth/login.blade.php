@@ -35,7 +35,6 @@
                              <div class="col-lg-7 align-self-center">
                                 <div class="p-3">
                                    <h2 class="mb-2">Login</h2>
-                                   <p>Create your POSDash account.</p>
                                    <form action="{{route('login')}}" method="post">
                                     @csrf
                                       <div class="row">
