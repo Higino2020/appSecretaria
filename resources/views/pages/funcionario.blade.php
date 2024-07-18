@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <div class="header-title" style="display: flex; justify-content: space-between; width: 100%">
-                    <h4 class="card-title">Funcionarios do Sistema</h4>
+                    <h4 class="card-title">Funcionarios da Escola</h4>
                     <a href="#Cadastrar" data-toggle="modal" style="font-size: 20pt"><i class="fa fa-plus-circle"></i></a>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                     <tbody>
                         @foreach ($valor as $func)
                             <tr>
-                                <td>{{$func->nome}} {{$func->sobrenome}}</td>
+                                <td>{{$func->nome}}</td>
                                 <td>{{$func->cargo}}</td>
                                 <td>{{$func->departamento}}</td>
                                 <td>{{$func->telefone}}</td>
@@ -73,19 +73,13 @@
                     @csrf
                     <input type="hidden" name="id" id="id">
                         <div class="form-group">
-                            <label for="nome">Nome do funcionario</label>
+                            <label for="nome">Nome Completo</label>
                             <div class="form-input">
                                 <input type="text" class="form-control" name="nome" id="nome">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="sobrenome">Sobrenome do funcionario</label>
-                            <div class="form-input">
-                                <input type="text" class="form-control" name="sobrenome" id="sobrenome">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">E-mail do funcionario</label>
+                            <label for="email">E-mail</label>
                             <div class="form-input">
                                 <input type="text" class="form-control" name="email" id="email">
                             </div>
@@ -97,9 +91,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="cargo">Cargo do funcionario</label>
                             <div class="form-input">
-                                <input type="text" class="form-control" name="cargo" id="cargo">
+                                <select name="cargo" id="cargo" class="form-control">
+                                    <option value="">Selecionar o Cargo</option>
+                                    <option value="Diretor">Diretor</option>
+                                    <option value="Secretario">Secretario</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -132,14 +129,19 @@
     function editar(valor) {
         document.getElementById('id').value = valor.id;
         document.getElementById('nome').value = valor.nome;
-        document.getElementById('sobrenome').value = valor.sobrenome;
         document.getElementById('cargo').value = valor.cargo;
+        document.getElementById('email').value = valor.email;
+        document.getElementById('telefone').value = valor.telefone;
+        document.getElementById('departamento').value = valor.departamento;
         document.getElementById('data_contratacao').value = valor.data_contratacao;
     }
     function limpar() {
         document.getElementById('id').value = "";
         document.getElementById('name').value = "";
         document.getElementById('cargo').value = "";
+        document.getElementById('telefone').value = "";
+        document.getElementById('email').value = "";
+        document.getElementById('departamento').value = "";
         document.getElementById('data_contratacao').value = "";
     }
 </script>

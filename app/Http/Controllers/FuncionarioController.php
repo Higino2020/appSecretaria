@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Funcionario;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FuncionarioController extends Controller
 {
@@ -33,7 +34,6 @@ class FuncionarioController extends Controller
             $valor->user_id=$user->id;
         }
         $valor->nome=$request->nome;
-        $valor->sobrenome=$request->sobrenome;
         $valor->cargo=$request->cargo;
         $valor->departamento=$request->departamento;
         $valor->telefone=$request->telefone;

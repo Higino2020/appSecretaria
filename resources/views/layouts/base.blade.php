@@ -4,7 +4,7 @@
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>ISAAC NEWTON</title>
-      
+
       <!-- Favicon -->
       <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}" />
       <link rel="stylesheet" href="{{asset('css/backend-plugin.min.css')}}">
@@ -22,7 +22,7 @@
     <!-- loader END -->
     <!-- Wrapper Start -->
     <div class="wrapper">
-      
+
       <!-- Menu da aplicação -->
       <div class="iq-sidebar  sidebar-default ">
           <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
@@ -36,14 +36,15 @@
           <div class="data-scrollbar" data-scroll="1">
               <nav class="iq-sidebar-menu">
                   <ul id="iq-sidebar-toggle" class="iq-menu">
-                      <li class="active">
-                          <a href="{{url('/')}}" class="svg-icon">                        
-                              <svg  class="svg-icon" id="p-dash1" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line>
-                              </svg>
-                              <span class="ml-4">Dashboards</span>
-                          </a>
-                      </li>
+                    @if(Auth::user()->tipo !="Director")
+                    <li class="active">
+                        <a href="{{url('/')}}" class="svg-icon">
+                            <svg  class="svg-icon" id="p-dash1" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line>
+                            </svg>
+                            <span class="ml-4">Dashboards</span>
+                        </a>
+                    </li>
                       <li class=" ">
                           <a href="{{route('user.index')}}" class="svg-icon">
                             <i class="fa fa-user"></i>
@@ -57,11 +58,24 @@
                           </a>
                       </li>
                       <li class=" ">
-                        <a href="{{route('doc.index')}}" class="svg-icon">
-                            <i class="fa fa-file"></i>
-                              <span class="ml-4">Documentos</span>
+                        <a href="{{route('financ.index')}}" class="svg-icon">
+                            <i class="fa fa-money-bill"></i>
+                              <span class="ml-4">Financeiro</span>
                           </a>
                       </li>
+                      <li class=" ">
+                        <a href="{{route('project.index')}}" class="svg-icon">
+                            <i class="fa fa-briefcase"></i>
+                              <span class="ml-4">Projecto</span>
+                          </a>
+                      </li>
+                      <li class=" ">
+                        <a href="{{route('tarefas.index')}}" class="svg-icon">
+                            <i class="fa fa-list-alt"></i>
+                              <span class="ml-4">Tarefas</span>
+                          </a>
+                      </li>
+                      
                       <li class=" ">
                         <a href="{{route('student.index')}}" class="svg-icon">
                             <i class="fa fa-users"></i>
@@ -80,35 +94,24 @@
                               <span class="ml-4">Correspondecia</span>
                           </a>
                       </li>
+                      @else
+                      <li class=" ">
+                        <a href="{{route('doc.index')}}" class="svg-icon">
+                            <i class="fa fa-file"></i>
+                              <span class="ml-4">Documentos</span>
+                          </a>
+                      </li>
                       <li class=" ">
                         <a href="{{route('visit.index')}}" class="svg-icon">
                             <i class="fa fa-male"></i>
                               <span class="ml-4">Visitante</span>
                           </a>
                       </li>
-                     
-                      <li class=" ">
-                        <a href="{{route('project.index')}}" class="svg-icon">
-                            <i class="fa fa-briefcase"></i>
-                              <span class="ml-4">Projecto</span>
-                          </a>
-                      </li>
-                      <li class=" ">
-                        <a href="{{route('tarefas.index')}}" class="svg-icon">
-                            <i class="fa fa-list-alt"></i>
-                              <span class="ml-4">Tarefas</span>
-                          </a>
-                      </li>
                       
-                      <li class=" ">
-                        <a href="{{route('financ.index')}}" class="svg-icon">
-                            <i class="fa fa-money-bill"></i>
-                              <span class="ml-4">Financeiro</span>
-                          </a>
-                      </li>
+                      @endif
                   </ul>
               </nav>
-             
+
               <div class="p-3"></div>
           </div>
           </div>      <div class="iq-top-navbar">
@@ -119,11 +122,11 @@
                       <a href="{{url('/')}}" class="header-logo">
                           <img src="{{asset('images/logo.png')}}" class="img-fluid rounded-normal" alt="logo">
                           <h5 class="logo-title ml-3">ISAAC NEWTON</h5>
-      
+
                       </a>
                   </div>
                   <div class="iq-search-bar device-search">
-                     
+
                   </div>
                   <div class="d-flex align-items-center">
                       <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -133,11 +136,13 @@
                       </button>
                       <div class="collapse navbar-collapse" id="navbarSupportedContent">
                           <ul class="navbar-nav ml-auto navbar-list align-items-center">
-                              <li class="nav-item nav-icon search-content">
+                            @if(Auth::user()->tipo != "Funcionario")  
+                            <li class="nav-item nav-icon search-content">
                                   <a href="#" class="search-toggle rounded" id="dropdownSearch" data-toggle="dropdown"
                                       aria-haspopup="true" aria-expanded="false">
                                       <i class="ri-search-line"></i>
                                   </a>
+                                  @else
                                   <div class="iq-search-bar iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownSearch">
                                       <form action="#" class="searchbox p-2">
                                           <div class="form-group mb-0 position-relative">
@@ -147,7 +152,8 @@
                                           </div>
                                       </form>
                                   </div>
-                              </li>
+                                </li>
+                                @endif
                               <li class="nav-item nav-icon dropdown caption-content">
                                   <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton4"
                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -209,7 +215,7 @@
                   </div>
               </div>
           </div>
-      </div>     
+      </div>
      <div class="content-page">
         @yield('secretaria')
       </div>
@@ -236,16 +242,16 @@
     </footer>
     <!-- Backend Bundle JavaScript -->
     <script src="{{asset('js/backend-bundle.min.js')}}"></script>
-    
+
     <!-- Table Treeview JavaScript -->
     <script src="{{asset('js/table-treeview.js')}}"></script>
-    
+
     <!-- Chart Custom JavaScript -->
     <script src="{{asset('js/customizer.js')}}"></script>
-    
+
     <!-- Chart Custom JavaScript -->
     <script async src="{{asset('js/chart-custom.js')}}"></script>
-    
+
     <!-- app JavaScript -->
     <script src="{{asset('js/app.js')}}"></script>
     <script>
