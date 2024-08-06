@@ -9,15 +9,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     ClasseController,
-    CorrespondeciaController,
-    DocumentoController,
-    FinanceiroController,
     FuncionarioController,
-    ProjectoController,
     EstudanteController,
-    TarefaController,
     UserController,
-    VisitanteController
+    MatriculaController,
+    PautaController,
+    DisciplinaController,
+    FaltaController,
+    TurmaController
 };
 use Illuminate\Support\Facades\Storage;
 
@@ -29,20 +28,18 @@ Route::group(['middleware'=>'auth'],function(){
     Route::resource('user',UserController::class);
     Route::resource('funcio',FuncionarioController::class);
     Route::get('apager/{id}/funcio',[FuncionarioController::class,'apagar'])->name('funcio.apagar');
-    Route::resource('doc',DocumentoController::class);
-    Route::get('apager/{id}/doc',[DocumentoController::class,'apagar'])->name('doc.apagar');
+    Route::resource('Matri',MatriculaController::class);
+    Route::get('apager/{id}/Matri',[MatriculaController::class,'apagar'])->name('Matri.apagar');
     Route::resource('classe',ClasseController::class);
     Route::get('apager/{id}/classe',[ClasseController::class,'apagar'])->name('classe.apagar');
-    Route::resource('corresp',CorrespondeciaController::class);
-    Route::get('apager/{id}/corresp',[CorrespondeciaController::class,'apagar'])->name('corresp.apagar');
-    Route::resource('visit',VisitanteController::class);
-    Route::get('apager/{id}/visit',[VisitanteController::class,'apagar'])->name('visit.apagar');
-    Route::resource('project',ProjectoController::class);
-    Route::get('apager/{id}/project',[ProjectoController::class,'apagar'])->name('project.apagar');
-    Route::resource('tarefas',TarefaController::class);
-    Route::get('apager/{id}/tarefas',[TarefaController::class,'apagar'])->name('tarefas.apagar');
-    Route::resource('financ',FinanceiroController::class);
-    Route::get('apager/{id}/financ',[FinanceiroController::class,'apagar'])->name('financ.apagar');
+    Route::resource('paut',PautaController::class);
+    Route::get('apager/{id}/paut',[PautaController::class,'apagar'])->name('paut.apagar');
+    Route::resource('Disc',DisciplinaController::class);
+    Route::get('apager/{id}/Disc',[DisciplinaController::class,'apagar'])->name('Disc.apagar');
+    Route::resource('Turm',TurmaController::class);
+    Route::get('apager/{id}/Turm',[TurmaController::class,'apagar'])->name('Turm.apagar');
+    Route::resource('falt',FaltaController::class);
+    Route::get('apager/{id}/falt',[FaltaController::class,'apagar'])->name('falt.apagar');
     Route::resource('student',EstudanteController::class);
     Route::get('apager/{id}/student',[EstudanteController::class,'apagar'])->name('student.apagar');
 

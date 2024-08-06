@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\estudante;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Plank\Mediable\Facades\MediaUploader;
@@ -31,6 +32,8 @@ class EstudanteController extends Controller
         } else {
             # code...
             $student= new estudante();
+            $user  = User::cadastrar($request);
+            $student->user_id=$user->id;
         }
         if (!isset($student->bilhete)) {
             # code...

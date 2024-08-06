@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('qtd_falta');
             $table->string('data');
             $table->foreignId('estudantes_Id')->constrained('estudantes');
+            $table->foreignId('funcionario_Id')->constrained('funcionarios');
             $table->timestamps();
         });
     }
