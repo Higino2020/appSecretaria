@@ -58,11 +58,18 @@
                           </a>
                       </li>
                       <li class=" ">
+                        <a href="{{route('student.index')}}" class="svg-icon">
+                            <i class="fa fa-users"></i>
+                              <span class="ml-4">Estudante</span>
+                          </a>
+                      </li>
+                      <li class=" ">
                         <a href="{{route('financ.index')}}" class="svg-icon">
                             <i class="fa fa-money-bill"></i>
                               <span class="ml-4">Financeiro</span>
                           </a>
                       </li>
+
                       <li class=" ">
                         <a href="{{route('project.index')}}" class="svg-icon">
                             <i class="fa fa-briefcase"></i>
@@ -75,13 +82,8 @@
                               <span class="ml-4">Tarefas</span>
                           </a>
                       </li>
-                      
-                      <li class=" ">
-                        <a href="{{route('student.index')}}" class="svg-icon">
-                            <i class="fa fa-users"></i>
-                              <span class="ml-4">Estudante</span>
-                          </a>
-                      </li>
+
+
                       <li class=" ">
                         <a href="{{route('agenda.index')}}" class="svg-icon">
                             <i class="fa fa-book"></i>
@@ -107,7 +109,7 @@
                               <span class="ml-4">Visitante</span>
                           </a>
                       </li>
-                      
+
                       @endif
                   </ul>
               </nav>
@@ -136,7 +138,7 @@
                       </button>
                       <div class="collapse navbar-collapse" id="navbarSupportedContent">
                           <ul class="navbar-nav ml-auto navbar-list align-items-center">
-                            @if(Auth::user()->tipo != "Funcionario")  
+                            @if(Auth::user()->tipo != "Funcionario")
                             <li class="nav-item nav-icon search-content">
                                   <a href="#" class="search-toggle rounded" id="dropdownSearch" data-toggle="dropdown"
                                       aria-haspopup="true" aria-expanded="false">

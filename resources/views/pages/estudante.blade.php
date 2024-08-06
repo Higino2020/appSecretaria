@@ -26,14 +26,16 @@
                     <table id="datatable" class="table data-tables table-striped">
                     <thead>
                         <tr class="ligth">
+                            <th>Foto</th>
                             <th>Certificado</th>
                             <th>Bilhete</th>
                             <th>Nome Completo</th>
                             <th>Genero</th>
+                            <th>Província</th>
+                            <th>Naturalidade</th>
                             <th>Nº BI</th>
-                            <th>Nº Telefone</th>
-                            <th>Matrícula</th>
-                            <th>Ano Academico</th>
+                            <th>Nome do Pai e Mãe</th>
+                            <th>Nº Tel</th>
                             <th>Data</th>
                             <th>Responsável</th>
                         </tr>
@@ -41,14 +43,16 @@
                     <tbody>
                         @foreach ($student as $dados)
                             <tr>
+                                <td><a href="{{route('baixar',$dados->foto)}}" class="text-danger" title="Clica para descarregar o fichero">  <i style="font-size:50px" class="fa fa-file-pdf"></i> </a></td>
                                 <td><a href="{{route('baixar',$dados->bilhete)}}" class="text-danger" title="Clica para descarregar o fichero">  <i style="font-size:50px" class="fa fa-file-pdf"></i> </a></td>
                                 <td><a href="{{route('baixar',$dados->certificado)}}" class="text-danger" title="Clica para descarregar o fichero">  <i style="font-size:50px" class="fa fa-file-pdf"></i> </a></td>
                                 <td>{{$dados->nome}}</td>
                                 <td>{{$dados->genero}}</td>
+                                <td>{{$dados->provincia}}</td>
+                                <td>{{$dados->naturalidade}}</td>
                                 <td>{{$dados->n_bilhete}}</td>
+                                <td>{{$dados->afiliacao}}</td>
                                 <td>{{$dados->telefone}}</td>
-                                <td>{{$dados->matricula}}</td>
-                                <td>{{$dados->ano_academico}}</td>
                                 <td>{{$dados->data}}</td>
                                 <td>{{$dados->funcionario->nome}}</td>
                                 <td>
@@ -98,15 +102,41 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="provincia">Província</label>
+                            <div class="form-input">
+                                <input type="text" name="provincia" id="provincia" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="n_bilhete">Nº do Bilhete</label>
                             <div class="form-input">
                                 <input type="text" name="n_bilhete" id="n_bilhete" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="telefone">Nº do Pai</label>
+                            <label for="naturalidade">Naturalidade</label>
+                            <div class="form-input">
+                                <input type="text" name="naturalidade" id="naturalidade" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="afiliacao">Nome do Pai e da Mãe</label>
+                            <div class="form-input">
+                                <input type="text" name="afiliacao" id="afiliacao" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">Nº do Pai ou Mãe</label>
                             <div class="form-input">
                                 <input type="text" name="telefone" id="telefone" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="foto">Foto</label>
+                            <div class="form-input">
+                                <input type="file" name="foto" id="foto" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -119,19 +149,6 @@
                             <label for="bilhete">Bilhete</label>
                             <div class="form-input">
                                 <input type="file" name="bilhete" id="bilhete" class="form-control" />
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="matricula">Nº de Matrícula</label>
-                            <div class="form-input">
-                                <input type="text" name="matricula" id="matricula" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="ano_academico">Ano Académico</label>
-                            <div class="form-input">
-                                <input name="ano_academico" id="ano_academico" style="text" class="form-control" />
                             </div>
                         </div>
                 </div>
@@ -154,8 +171,10 @@
         document.getElementById('telefone').value = valor.telefone;
         document.getElementById('certificado').value = valor.certificado;
         document.getElementById('bilhete').value = valor.bilhete;
-        document.getElementById('matricula').value = valor.matricula;
-        document.getElementById('ano_academico').value = valor.ano_academico;
+        document.getElementById('afiliacao').value = valor.afiliacao;
+        document.getElementById('provincia').value = valor.provincia;
+        document.getElementById('foto').value = valor.foto;
+        document.getElementById('naturalidade').value = valor.naturalidade;
     }
     function limpar() {
         document.getElementById('id').value = "";
@@ -165,8 +184,10 @@
         document.getElementById('telefone').value = ""
         document.getElementById('certificado').value = "";
         document.getElementById('bilhete').value = "";
-        document.getElementById('matricula').value = "";
-        document.getElementById('ano_academico').value = "";
+        document.getElementById('provincia').value = "";
+        document.getElementById('foto').value = "";
+        document.getElementById('afiliacao').value = "";
+        document.getElementById('naturalidade').value = "";
         }
 </script>
 @endsection

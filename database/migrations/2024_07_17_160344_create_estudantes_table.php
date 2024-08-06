@@ -15,12 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->string('genero');
+            $table->string('provincia');
+            $table->string('naturalidade');
+            $table->string('afiliacao');
+            $table->string('foto');
             $table->string('n_bilhete')->nullable();
             $table->string('telefone')->unique();
             $table->string('bilhete')->nullable();
             $table->string('certificado')->nullable();
-            $table->string('matricula')->unique();
-            $table->string('ano_academico');
             $table->string('data');
             $table->string('status')->nullable();
             $table->foreignId('funcionario_id')->constrained('funcionarios');

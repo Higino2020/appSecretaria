@@ -50,15 +50,25 @@ class EstudanteController extends Controller
                 ->setAllowedExtensions(['doc','docx','pdf','xlsx','pptx','jpg','png','jpeg'])->upload();
                 $student->certificado=$doc->basename;
             }
+            if (request()->hasFile('foto')) {
+                # code...
+                $doc=MediaUploader::fromSource(request()->file('foto'))
+                ->toDirectory('docEstudante')->onDuplicateIncrement()
+                ->useHashForFilename()
+                ->setAllowedExtensions(['jpg','png','jpeg'])->upload();
+                $student->foto=$doc->basename;
+            }
         }
         $student->nome=$request->nome;
         $student->genero=$request->genero;
         $student->n_bilhete=$request->n_bilhete;
         $student->telefone=$request->telefone;
+        $student->provincia=$request->provincia;
+        $student->foto=$request->foto;
+        $student->naturalidade=$request->naturalidade;
+        $student->afiliacao=$request->afiliacao;
         $student->bilhete=$request->bilhete;
         $student->certificado=$request->certificado;
-        $student->matricula=$request->matricula;
-        $student->ano_academico=$request->ano_academico;
         $student->data=date("Y-m-d");
         $student->status="Enviado";
         $student->funcionario_id=Auth::user()->funcionario->id;
