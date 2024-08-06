@@ -82,12 +82,10 @@
                               <span class="ml-4">Tarefas</span>
                           </a>
                       </li>
-
-
                       <li class=" ">
-                        <a href="{{route('agenda.index')}}" class="svg-icon">
-                            <i class="fa fa-book"></i>
-                              <span class="ml-4">Agendas</span>
+                        <a href="{{route('classe.index')}}" class="svg-icon">
+                            <i class="fa fa-list-alt"></i>
+                              <span class="ml-4">Classe</span>
                           </a>
                       </li>
                       <li class=" ">

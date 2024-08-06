@@ -8,7 +8,7 @@ use Intervention\Image\ImageManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
-    AgendaController,
+    ClasseController,
     CorrespondeciaController,
     DocumentoController,
     FinanceiroController,
@@ -31,8 +31,8 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('apager/{id}/funcio',[FuncionarioController::class,'apagar'])->name('funcio.apagar');
     Route::resource('doc',DocumentoController::class);
     Route::get('apager/{id}/doc',[DocumentoController::class,'apagar'])->name('doc.apagar');
-    Route::resource('agenda',AgendaController::class);
-    Route::get('apager/{id}/agenda',[AgendaController::class,'apagar'])->name('agenda.apagar');
+    Route::resource('classe',ClasseController::class);
+    Route::get('apager/{id}/classe',[ClasseController::class,'apagar'])->name('classe.apagar');
     Route::resource('corresp',CorrespondeciaController::class);
     Route::get('apager/{id}/corresp',[CorrespondeciaController::class,'apagar'])->name('corresp.apagar');
     Route::resource('visit',VisitanteController::class);
