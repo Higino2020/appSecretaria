@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <div class="header-title" style="display: flex; justify-content: space-between; width: 100%">
-                    <h4 class="card-title">Correspondênçia da Empresa</h4>
+                    <h4 class="card-title">Discondênçia da Empresa</h4>
                     <a href="#Cadastrar" data-toggle="modal" style="font-size: 20pt"><i class="fa fa-plus-circle"></i></a>
                 </div>
             </div>
@@ -26,26 +26,20 @@
                     <table id="datatable" class="table data-tables table-striped">
                     <thead>
                         <tr class="ligth">
-                            <th>Tipo</th>
-                            <th>Assunto</th>
-                            <th>Descrição</th>
-                            <th>Remetente</th>
-                            <th>Data</th>
-                            <th>Destinatário</th>
+                            <th>Código</th>
+                            <th>Nome da Disciplina</th>
+                            <th>Funcionário</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($valor as $dados)
                             <tr>
-                                <td>{{$dados->tipo}}</td>
-                                <td>{{$dados->assunto}}</td>
-                                <td>{{$dados->descricao}}</td>
-                                <td>{{$dados->remetente}}</td>
-                                <td>{{$dados->data}}</td>
+                                <td>{{$dados->nome_disciplina}}</td>
+                                <td>{{$dados->funcionario_Id}}</td>
                                 <td>
                                     <a href="#Cadastrar" data-toggle="modal" class="text-primary" onclick="editar({{$dados}})" ><i class="fa fa-edit"></i></a>
-                                    <a href="{{route('corresp.apagar',$dados->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>
+                                    <a href="{{route('Disc.apagar',$dados->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -63,53 +57,30 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
                 <div class="modal-header">
-                        <h5 class="modal-title">Cadastrar Correspondênçia</h5>
+                        <h5 class="modal-title">Cadastrar Disciplína</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                     </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                   <form action="{{route('corresp.store')}}" method="post" enctype="multipart/form-data">
+                   <form action="{{route('Disc.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                          <input type="hidden" name="id" id="id">
+                        
                         <div class="form-group">
-                            <label for="tipo">Tipo</label>
+                            <label for="nome_disciplina">Nome da Disciplína</label>
                             <div class="form-input">
-                                <select name="tipo" id="tipo" class="form-control">
-                                    <option value="Interna">Interna</option>
-                                    <option value="Externa">Externa</option>
-                                </select>
+                                <input type="text" name="nome_disciplina" id="nome_disciplina" class="form-control" />
                             </div>
                         </div>
+                       
+                               <!-- <input type="date" min="{{date(Y-m-d)}}" class="form-control" name="data" id="data">-->
+                            
                         <div class="form-group">
-                            <label for="assunto">Assunto</label>
+                            <label for="funcionario_id">Funcionario</label>
                             <div class="form-input">
-                                <input type="text" name="assunto" id="assunto" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="descricao">Descrição</label>
-                            <div class="form-input">
-                                <textarea name="descricao" id="descricao" style="resize: none" class="form-control" cols="30" rows="4"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="remetente">Remetente</label>
-                            <div class="form-input">
-                                <input type="text" name="remetente" id="remetente"  class="form-control" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="data">Data</label>
-                            <div class="form-input">
-                                <input type="date" min="{{date('Y-m-d')}}" class="form-control" name="data" id="data">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="destinatario">Destinatário</label>
-                            <div class="form-input">
-                                <select class="form-control" name="destinatario" id="destinatario">
+                                <select class="form-control" name="funcionario_id" id="funcionario_id">
                                     @foreach (App\Models\Funcionario::orderBy('nome','ASC')->get() as $funcio)
                                         <option value="{{$funcio->id}}">{{$funcio->nome}}</option>
                                     @endforeach
@@ -130,21 +101,13 @@
 <script>
     function editar(valor) {
         document.getElementById('id').value = valor.id;
-        document.getElementById('tipo').value = valor.tipo;
-        document.getElementById('assunto').value = valor.assunto;
-        document.getElementById('descricao').value = valor.descricao;
-        document.getElementById('remetente').value = valor.remetente;
-        document.getElementById('data').value = valor.data;
-        document.getElementById('destinatario').value = valor.destinatario;
+        document.getElementById('nome_disciplina').value = valor.nome_disciplina;
+        document.getElementById('funcionario_id').value = valor.funcionario_id;
     }
     function limpar() {
         document.getElementById('id').value = "";
-        document.getElementById('tipo').value = "";
-        document.getElementById('assunto').value = "";
-        document.getElementById('descricao').value = "";
-        document.getElementById('remetente').value = "";
-        document.getElementById('data').value = "";
-        document.getElementById('destinatario').value = "";
+        document.getElementById('nome_disciplina').value = "";
+        document.getElementById('funcionario_id').value = "";
     }
 </script>
 @endsection
