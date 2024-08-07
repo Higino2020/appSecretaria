@@ -66,10 +66,11 @@
                    <form action="{{route('Turm.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                          <input type="hidden" name="id" id="id">
+                         <input type="hidden" name="funcionario_id" value="{{Auth::user()->id}}">
                          <div class="form-group">
-                            <label for="nome_projeto">Nome</label>
+                            <label for="nome_turma">Nome</label>
                             <div class="form-input">
-                                <input type="text" name="nome_projeto" id="nome_projeto" class="form-control" />
+                                <input type="text" name="nome_turma" id="nome_turma" class="form-control" />
                             </div>
                         </div>
                 </div>
@@ -86,21 +87,11 @@
 <script>
     function editar(valor) {
         document.getElementById('id').value = valor.id;
-        document.getElementById('tipo_transacao').value = valor.tipo_transacao;
-        document.getElementById('data').value = valor.data;
-        document.getElementById('valor').value = valor.valor;
-        document.getElementById('descricao').value = valor.descricao;
-        document.getElementById('categoria').value = valor.categoria;
-        document.getElementById('responsavel').value = valor.responsavel;
+        document.getElementById('nome_turma').value = valor.nome_turma;
     }
     function limpar() {
         document.getElementById('id').value = "";
-        document.getElementById('tipo_transacao').value = "";
-        document.getElementById('data').value = "";
-        document.getElementById('valor').value = "";
-        document.getElementById('descricao').value = "";
-        document.getElementById('categoria').value = "";
-        document.getElementById('responsavel').value = "";
+        document.getElementById('nome_turma').value = "";
     }
 </script>
 @endsection

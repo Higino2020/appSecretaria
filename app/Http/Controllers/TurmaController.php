@@ -30,7 +30,7 @@ class TurmaController extends Controller
                     $valor= new Turma();
                 }
                 $valor->nome_turma=$request->nome_turma;
-                $valor->funcionario_Id=$request->funcionario_Id;
+                $valor->funcionario_id=$request->funcionario_id;
                 $valor->save();
                 return redirect()->back()->with("Sucesso","Turma CADASTRADO");
             }
