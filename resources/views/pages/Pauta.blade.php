@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <div class="header-title" style="display: flex; justify-content: space-between; width: 100%">
-                    <h4 class="card-title">Tarefa da Escola</h4>
+                    <h4 class="card-title">Pautas da Escola</h4>
                     <a href="#Cadastrar" data-toggle="modal" style="font-size: 20pt"><i class="fa fa-plus-circle"></i></a>
                 </div>
             </div>
@@ -26,29 +26,34 @@
                     <table id="datatable" class="table data-tables table-striped">
                     <thead>
                         <tr class="ligth">
-                            <th>Nome do tarefaso</th>
-                            <th>Descrição</th>
-                            <th>Data de Inicio</th>
-                            <th>Data de Termino</th>
+                            <th>Estudante</th>
+                            <th>Disciplina</th>
+                            <th>1ª Nota</th>
+                            <th>2ª Nota</th>
+                            <th>Exame</th>
+                            <th>Final</th>
+                            <th>Período</th>
                             <th>Estado</th>
-                            <th>Projecto</th>
-                            <th>Responsável</th>
+                            <th>Professor</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($valor as $dados)
+                        @foreach ($paut as $dados)
                             <tr>
-                                <td>{{$dados->nome_tarefa}}</td>
-                                <td>{{$dados->descricao}}</td>
-                                <td>{{$dados->data_limite}}</td>
-                                <td>{{$dados->prioridade}}</td>
+                                <td>{{$dados->estudante_id}}</td>
+                                <td>{{$dados->disciplina_id}}</td>
+                                <td>{{$dados->prova1}}</td>
+                                <td>{{$dados->prova2}}</td>
+                                <td>{{$dados->exame}}</td>
+                                <td>{{$dados->final}}</td>
+                                <td>{{$dados->periodo}}</td>
+                                <td>{{$dados->final}}</td>
                                 <td>{{$dados->status}}</td>
-                                <td>{{$dados->projecto->nome_projecto}}</td>
                                 <td>{{$dados->funcionario->nome}}</td>
                                 <td>
                                     <a href="#Cadastrar" data-toggle="modal" class="text-primary" onclick="editar({{$dados}})" ><i class="fa fa-edit"></i></a>
-                                    <a href="{{route('tarefas.apagar',$dados->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>
+                                    <a href="{{route('paut.apagar',$dados->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -66,68 +71,72 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
                 <div class="modal-header">
-                        <h5 class="modal-title">Cadastrar Tarefas</h5>
+                        <h5 class="modal-title">Cadastrar Pautas</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                     </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                   <form action="{{route('tarefas.store')}}" method="post" enctype="multipart/form-data">
+                   <form action="{{route('paut.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                          <input type="hidden" name="id" id="id">
-
                         <div class="form-group">
-                            <label for="nome_tarefa">Nome da Tarefa</label>
-                            <div class="form-input">
-                                <input type="text" name="nome_tarefa" id="nome_tarefa" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="descricao">Descrição</label>
-                            <div class="form-input">
-                                <textarea name="descricao" id="descricao" style="resize: none" class="form-control" cols="30" rows="4"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="data_limite">Data do Limite</label>
-                            <div class="form-input">
-                                <input type="date" min="{{date('Y-m-d')}}" class="form-control" name="data_limite" id="data_limite">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="prioridade">Prioridades</label>
-                            <div class="form-input">
-                                <textarea name="prioridade" id="prioridade" style="resize: none" class="form-control" cols="30" rows="4"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="status">Estado</label>
-                            <div class="form-input">
-                                <select name="status" id="status" class="form-control">
-                                    <option value="Activo">Activo</option>
-                                    <option value="Não Activo">Não Activo</option>
-                                    <option value="Pendente">Pendente</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="projeto_id">Projecto</label>
-                            <div class="form-input">
-                                <select class="form-control" name="projeto_id" id="projeto_id">
-                                    @foreach (App\Models\Projecto::orderBy('nome_projeto','ASC')->get() as $project)
-                                        <option value="{{$project->id}}">{{$project->nome_projeto}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="responsavel">Responsavel do tarefaso</label>
+                            <label for="responsavel">Estudante</label>
                             <div class="form-input">
                                 <select class="form-control" name="responsavel" id="responsavel">
-                                    @foreach (App\Models\Funcionario::orderBy('nome','ASC')->get() as $funcio)
-                                        <option value="{{$funcio->id}}">{{$funcio->nome}}</option>
+                                    @foreach (App\Models\estudante::orderBy('nome','ASC')->get() as $estudante_id)
+                                        <option value="{{$estudante_id->id}}">{{$estudante_id->nome}}</option>
                                     @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="responsavel">Disciplina</label>
+                            <div class="form-input">
+                                <select class="form-control" name="responsavel" id="responsavel">
+                                    @foreach (App\Models\Disciplina::orderBy('nome_disciplina','ASC')->get() as $disciplina_id)
+                                        <option value="{{$disciplina_id->id}}">{{$disciplina_id->nome_disciplina}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nome_projeto">Primeira Prova</label>
+                            <div class="form-input">
+                                <input type="number" name="nome_projeto" id="nome_projeto" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="descricao">Segunda Prova</label>
+                            <div class="form-input">
+                                <input type="number" name="nome_projeto" id="nome_projeto" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="data_inicio">Exame</label>
+                            <div class="form-input">
+                                <input type="number"  class="form-control" name="data_inicio" id="data_inicio">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-input">
+                                <select name="status" id="status" class="form-control">
+                                    <option value="">Selecionar o Período</option>
+                                    <option value="Manhã">Manhã</option>
+                                    <option value="Tarde">Tarde</option>
+                                    <option value="Noite">Noite</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-input">
+                                <select name="status" id="status" class="form-control">
+                                    <option value="">Selecionar Estado</option>
+                                    <option value="Aprovado">Aprovado</option>
+                                    <option value="Reprovado">Reprovado</option>
+                                    <option value="Desistido">Desistido</option>
                                 </select>
                             </div>
                         </div>
@@ -145,22 +154,20 @@
 <script>
     function editar(valor) {
         document.getElementById('id').value = valor.id;
-        document.getElementById('nome_tarefa').value = valor.nome_tarefa;
+        document.getElementById('nome_projeto').value = valor.nome_projeto;
         document.getElementById('descricao').value = valor.descricao;
-        document.getElementById('data_limite').value = valor.data_limite;
-        document.getElementById('prioridade').value = valor.prioridade;
+        document.getElementById('data_inicio').value = valor.data_inicio;
+        document.getElementById('data_termino').value = valor.data_termino;
         document.getElementById('status').value = valor.status;
-        document.getElementById('projeto_id').value = valor.projeto_id;
         document.getElementById('responsavel').value = valor.responsavel;
     }
     function limpar() {
         document.getElementById('id').value = "";
-        document.getElementById('nome_tarefa').value = "";
+        document.getElementById('nome_projeto').value = "";
         document.getElementById('descricao').value = "";
-        document.getElementById('data_limite').value = "";
-        document.getElementById('prioridade').value = "";
+        document.getElementById('data_inicio').value = "";
+        document.getElementById('data_termino').value = "";
         document.getElementById('status').value = "";
-        document.getElementById('projeto_id').value = "";
         document.getElementById('responsavel').value = "";
     }
 </script>

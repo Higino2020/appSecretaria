@@ -13,7 +13,7 @@ class TurmaController extends Controller
             public function index()
             {
                 //
-                $valor=Turma::orderBy('nome','asc')->get();
+                $valor=Turma::all();
                 return view("pages.Turma",compact("valor"));
             }
             /**

@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <div class="header-title" style="display: flex; justify-content: space-between; width: 100%">
-                    <h4 class="card-title">Disciplinas</h4>
+                    <h4 class="card-title">Documentos da Escola </h4>
                     <a href="#Cadastrar" data-toggle="modal" style="font-size: 20pt"><i class="fa fa-plus-circle"></i></a>
                 </div>
             </div>
@@ -26,20 +26,24 @@
                     <table id="datatable" class="table data-tables table-striped">
                     <thead>
                         <tr class="ligth">
-                            <th>Código</th>
-                            <th>Nome da Disciplina</th>
-                            <th>Professor</th>
+                            <th>Fichero</th>
+                            <th>Tipo de Documento</th>
+                            <th>Funcionario</th>
+                            <th>Descrição</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($valor as $dados)
+                        @foreach ($Matricula as $dados)
                             <tr>
-                                <td>{{$dados->nome_disciplina}}</td>
-                                <td>{{$dados->funcionario_Id}}</td>
+                                <td>{{$dados->estudante_Id}}</td>
+                                <td>{{$dados->turma_Id}}</td>
+                                <td>{{$dados->funcionario->nome?? ''}}</td>
+                                <td>{{$dados->ano_lectivo}}</td>
+                                <td>{{$dados->data_matricula}}</td>
                                 <td>
                                     <a href="#Cadastrar" data-toggle="modal" class="text-primary" onclick="editar({{$dados}})" ><i class="fa fa-edit"></i></a>
-                                    <a href="{{route('Disc.apagar',$dados->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>
+                                    <a href="{{route('Matri.apagar',$dados->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -57,32 +61,42 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
                 <div class="modal-header">
-                        <h5 class="modal-title">Cadastrar Disciplína</h5>
+                        <h5 class="modal-title">Cadastrar Documentos</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                     </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                   <form action="{{route('Disc.store')}}" method="post" enctype="multipart/form-data">
+                   <form action="{{route('Matri.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
-                         <input type="hidden" name="id" id="id">
-                        
+                        <input type="hidden" name="id" id="id">
+                        <input type="hidden" name="funcionario_id" value="{{ Auth::user()->id }}">
                         <div class="form-group">
-                            <label for="nome_disciplina">Nome da Disciplína</label>
+                            <label for="responsavel">Estudante</label>
                             <div class="form-input">
-                                <input type="text" name="nome_disciplina" id="nome_disciplina" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="funcionario_id">Professor</label>
-                            <div class="form-input">
-                                <select class="form-control" name="funcionario_id" id="funcionario_id">
-                                    @foreach (App\Models\Funcionario::orderBy('nome','ASC')->get() as $funcio)
-                                        <option value="{{$funcio->id}}">{{$funcio->nome}}</option>
+                                <select class="form-control" name="responsavel" id="responsavel">
+                                    @foreach (App\Models\estudante::orderBy('nome','ASC')->get() as $estudante_id)
+                                        <option value="{{$estudante_id->id}}">{{$estudante_id->nome}}</option>
                                     @endforeach
                                 </select>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="responsavel">Turma</label>
+                            <div class="form-input">
+                                <select class="form-control" name="responsavel" id="responsavel">
+                                    @foreach (App\Models\estudante::orderBy('nome','ASC')->get() as $estudante_id)
+                                        <option value="{{$estudante_id->id}}">{{$estudante_id->nome}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-input">
+                                <label for="data">Ano Letivo</label>
+                            </div>
+                            <input type="date" min="{{date('Y-m-d')}}" class="form-control" name="data" id="data">
                         </div>
                 </div>
             </div>
@@ -98,13 +112,13 @@
 <script>
     function editar(valor) {
         document.getElementById('id').value = valor.id;
-        document.getElementById('nome_disciplina').value = valor.nome_disciplina;
-        document.getElementById('funcionario_id').value = valor.funcionario_id;
+        document.getElementById('tipo_documento').value = valor.tipo_documento;
+        document.getElementById('descricao').value = valor.descricao;
     }
     function limpar() {
         document.getElementById('id').value = "";
-        document.getElementById('nome_disciplina').value = "";
-        document.getElementById('funcionario_id').value = "";
+        document.getElementById('tipo_documento').value = "";
+        document.getElementById('descricao').value = "";
     }
 </script>
 @endsection

@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('prova1');
             $table->string('prova2');
             $table->string('exame');
-            $table->string('periodo');
+            $table->string('final');
+            $table->string('periodo')->nullable(false);
             $table->string('status');
             $table->foreignId('estudante_id')->constrained('estudantes');
             $table->foreignId('funcionario_id')->constrained('funcionarios');

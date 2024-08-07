@@ -74,7 +74,7 @@ class EstudanteController extends Controller
         $student->certificado=$request->certificado;
         $student->data=date("Y-m-d");
         $student->status="Enviado";
-        $student->funcionario_id=Auth::user()->funcionario->id;
+        $student->funcionario_id=$request->funcionario_id;
         $student->save();
         return redirect()->back()->with("SUCESSO","ESTUDANTE CADASTRADO");
     }

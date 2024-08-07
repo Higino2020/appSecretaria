@@ -14,7 +14,7 @@ class PautaController extends Controller
         {
             //
             $paut= Pauta::all();
-            return view("pages.paut",compact("paut"));
+            return view("pages.Pauta",compact("paut"));
         }
         /**
          * Store a newly created resource in storage.
@@ -28,12 +28,19 @@ class PautaController extends Controller
             }else{
                 $paut= new Pauta();
             }
-            $paut->tipo=$request->tipo;
-            $paut->data=$request->data;
-            $paut->remetente=$request->remetente;
-            $paut->destinatario=$request->destinatario;
-            $paut->assunto=$request->assunto;
-            $paut->descricao=$request->descricao;
+            $paut->prova1=$request->prova1;
+            $paut->prova2=$request->prova2;
+            $paut->exame=$request->exame;
+            $paut->periodo=$request->periodo;
+            $valor=$request->prova1;
+            $valor2=$request->prova2;
+            $valor3=$request->exame;
+            $somatorio=($valor+$valor2+$valor3)/3;
+            $paut->final=$request->$somatorio;
+            $paut->status=$request->status;
+            $paut->estudante_id=$request->estudante_id;
+            $paut->funcionario_id=$request->funcionario_id;
+            $paut->disciplina_id=$request->disciplina_id;
             $paut->save();
             return redirect()->back()->with("Sucesso","PAUTA CADASTRADO");
         }
@@ -45,7 +52,7 @@ class PautaController extends Controller
         {
             //
             $paut=Pauta::find($id);
-            return view("pages.paut",compact("paut"));
+            return view("pages.Pauta",compact("paut"));
         }
 
         /**

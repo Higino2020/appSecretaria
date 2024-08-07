@@ -13,7 +13,7 @@ class FaltaController extends Controller
             public function index()
             {
                 //
-                $valor=Falta::orderBy('nome','asc')->get();
+                $valor=Falta::all();
                 return view("pages.Falta",compact("valor"));
             }
             /**
@@ -30,7 +30,7 @@ class FaltaController extends Controller
                     $valor= new Falta();
                 }
                 $valor->qtd_falta=$request->qtd_falta;
-                $valor->data=date('Y-m-d');
+                $valor->data=$request->data;
                 $valor->estudantes_Id=$request->estudantes_Id;
                 $valor->funcionario_Id=$request->funcionario_Id;
                 $valor->save();

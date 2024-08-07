@@ -64,49 +64,44 @@
                           </a>
                       </li>
                       <li class=" ">
-                        <a href="{{route('financ.index')}}" class="svg-icon">
+                        <a href="{{route('paut.index')}}" class="svg-icon">
                             <i class="fa fa-money-bill"></i>
-                              <span class="ml-4">Financeiro</span>
+                              <span class="ml-4">Pautas</span>
                           </a>
                       </li>
 
                       <li class=" ">
-                        <a href="{{route('project.index')}}" class="svg-icon">
+                        <a href="{{route('Disc.index')}}" class="svg-icon">
                             <i class="fa fa-briefcase"></i>
-                              <span class="ml-4">Projecto</span>
+                              <span class="ml-4">Disciplinas</span>
                           </a>
                       </li>
                       <li class=" ">
-                        <a href="{{route('tarefas.index')}}" class="svg-icon">
+                        <a href="{{route('Matri.index')}}" class="svg-icon">
                             <i class="fa fa-list-alt"></i>
-                              <span class="ml-4">Tarefas</span>
+                              <span class="ml-4">Matrículas</span>
                           </a>
                       </li>
                       <li class=" ">
                         <a href="{{route('classe.index')}}" class="svg-icon">
                             <i class="fa fa-list-alt"></i>
-                              <span class="ml-4">Classe</span>
+                              <span class="ml-4">Classes</span>
                           </a>
                       </li>
                       <li class=" ">
-                        <a href="{{route('corresp.index')}}" class="svg-icon">
+                        <a href="{{route('falt.index')}}" class="svg-icon">
                             <i class="fa fa-envelope"></i>
-                              <span class="ml-4">Correspondecia</span>
+                              <span class="ml-4">Faltas</span>
+                          </a>
+                      </li>
+                      <li class=" ">
+                        <a href="{{route('Turm.index')}}" class="svg-icon">
+                            <i class="fa fa-file"></i>
+                              <span class="ml-4">Turma</span>
                           </a>
                       </li>
                       @else
-                      <li class=" ">
-                        <a href="{{route('doc.index')}}" class="svg-icon">
-                            <i class="fa fa-file"></i>
-                              <span class="ml-4">Documentos</span>
-                          </a>
-                      </li>
-                      <li class=" ">
-                        <a href="{{route('visit.index')}}" class="svg-icon">
-                            <i class="fa fa-male"></i>
-                              <span class="ml-4">Visitante</span>
-                          </a>
-                      </li>
+                      <!-- INFORMACAO DA SECRETARIA QUE TERAO ACESSO-->
 
                       @endif
                   </ul>

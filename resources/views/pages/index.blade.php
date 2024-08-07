@@ -32,7 +32,7 @@
                                 </div>
                                 <div>
                                     <p class="mb-2">Total de Agenda</p>
-                                    <h4>{{App\Models\Agenda::count()}}</h4>
+                                    <h4></h4>
                                 </div>
                             </div>
                             <div class="iq-progress-bar mt-2">
@@ -51,7 +51,7 @@
                                 </div>
                                 <div>
                                     <p class="mb-2">Total de Correspondênçia</p>
-                                    <h4>{{App\Models\Correspondecia::count()}}</h4>
+                                    <h4></h4>
                                 </div>
                             </div>
                             <div class="iq-progress-bar mt-2">
@@ -70,7 +70,7 @@
                                 </div>
                                 <div>
                                     <p class="mb-2">Total de Projecto</p>
-                                    <h4>{{App\Models\Projecto::count()}}</h4>
+                                    <h4></h4>
                                 </div>
                             </div>
                             <div class="iq-progress-bar mt-2">
@@ -89,7 +89,7 @@
                                 </div>
                                 <div>
                                     <p class="mb-2">Total de Tarefa</p>
-                                    <h4>{{App\Models\Tarefa::count()}}</h4>
+                                    <h4></h4>
                                 </div>
                             </div>
                             <div class="iq-progress-bar mt-2">
