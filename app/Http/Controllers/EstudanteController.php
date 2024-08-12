@@ -27,54 +27,44 @@ class EstudanteController extends Controller
         //
         $student=null;
         if (isset($request->id)) {
-            # code...
             $student= estudante::find($request->id);
         } else {
             # code...
             $student= new estudante();
-            $user  = User::cadastrar($request);
-            $student->user_id=$user->id;
+            //$user  = estudante::cadastrar($request);
+            //$student->user_id=$user->id;
         }
-        if (!isset($student->bilhete)) {
-            # code...
-            if (request()->hasFile('bilhete')) {
-                # code...
-                $doc=MediaUploader::fromSource(request()->file('bilhete'))
-                ->toDirectory('docEstudante')->onDuplicateIncrement()
-                ->useHashForFilename()
-                ->setAllowedExtensions(['doc','docx','pdf','xlsx','pptx','jpg','png','jpeg'])->upload();
-                $student->bilhete=$doc->basename;
-            }
-            if (request()->hasFile('certificado')) {
-                # code...
-                $doc=MediaUploader::fromSource(request()->file('certificado'))
-                ->toDirectory('docEstudante')->onDuplicateIncrement()
-                ->useHashForFilename()
-                ->setAllowedExtensions(['doc','docx','pdf','xlsx','pptx','jpg','png','jpeg'])->upload();
-                $student->certificado=$doc->basename;
-            }
-            if (request()->hasFile('foto')) {
-                # code...
-                $doc=MediaUploader::fromSource(request()->file('foto'))
-                ->toDirectory('docEstudante')->onDuplicateIncrement()
-                ->useHashForFilename()
-                ->setAllowedExtensions(['jpg','png','jpeg'])->upload();
-                $student->foto=$doc->basename;
-            }
+        if (request()->hasFile('bilhete')) {
+            $doc=MediaUploader::fromSource(request()->file('bilhete'))
+            ->toDirectory('docEstudante')->onDuplicateIncrement()
+            ->useHashForFilename()
+            ->setAllowedExtensions(['doc','docx','pdf','xlsx','pptx','jpg','png','jpeg'])->upload();
+            $student->bilhete=$doc->basename;
+        }
+        if (request()->hasFile('certificado')) {
+            $doc=MediaUploader::fromSource(request()->file('certificado'))
+            ->toDirectory('docEstudante')->onDuplicateIncrement()
+            ->useHashForFilename()
+            ->setAllowedExtensions(['doc','docx','pdf','xlsx','pptx','jpg','png','jpeg'])->upload();
+            $student->certificado=$doc->basename;
+        }
+        if (request()->hasFile('foto')) {
+            $doc = MediaUploader::fromSource(request()->file('foto'))
+            ->toDirectory('docEstudante')->onDuplicateIncrement()
+            ->useHashForFilename()
+            ->setAllowedAggregateTypes(['image'])->upload();
+            $student->foto=$doc->basename;
         }
         $student->nome=$request->nome;
         $student->genero=$request->genero;
         $student->n_bilhete=$request->n_bilhete;
         $student->telefone=$request->telefone;
         $student->provincia=$request->provincia;
-        $student->foto=$request->foto;
         $student->naturalidade=$request->naturalidade;
         $student->afiliacao=$request->afiliacao;
-        $student->bilhete=$request->bilhete;
-        $student->certificado=$request->certificado;
         $student->data=date("Y-m-d");
         $student->status="Enviado";
-        $student->funcionario_id=$request->funcionario_id;
+        $student->funcionario_id= Auth::user()->funcionario->id ?? null;
         $student->save();
         return redirect()->back()->with("SUCESSO","ESTUDANTE CADASTRADO");
     }

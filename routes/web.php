@@ -45,16 +45,32 @@ Route::group(['middleware'=>'auth'],function(){
 
     Route::get('getfile/{nome}',function($name){
         $path = '';
-    $media = Media::whereBasename($name)->first();
+            $media = Media::whereBasename($name)->first();
 
-    if ($media != null) {
-        $path = $media->getDiskPath();
-    } else {
-        $path = 'default.png';
-    }
-    return (new Response(200))
-        ->header('Content-Type', '*');
-})->name('getfile');
+            if ($media != null) {
+                $path = $media->getDiskPath();
+            } else {
+                $path = 'default.png';
+            }
+            $img = Image::make($media->getAbsolutePath());
+            $w = 300;
+            $h = 300;
+
+            if (request()->w != null) {
+                $w = request()->w;
+            }
+            if (request()->h != null) {
+                $h = request()->h;
+            }
+            // resize the image to a width of 300 and constrain aspect ratio (auto height)
+            $img->resize($w, $h, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->stream();
+            //Log::debug(storage_path() . '/app/' . $path);
+            return (new Response($img->__toString(), 200))
+                ->header('Content-Type', '*');
+    })->name('getfile');
 
 
     Route::get('download/{nome}',function($nome){

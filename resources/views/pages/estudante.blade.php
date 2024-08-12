@@ -43,7 +43,7 @@
                     <tbody>
                         @foreach ($student as $dados)
                             <tr>
-                                <td><a href="{{route('baixar',$dados->foto)}}" class="text-danger" title="Clica para descarregar o fichero">  <i style="font-size:50px" class="fa fa-file-pdf"></i> </a></td>
+                                <td><img src="{{url('getfile/'.$dados->foto)}}" alt="Aqui vai imagem"></td>
                                 <td><a href="{{route('baixar',$dados->bilhete)}}" class="text-danger" title="Clica para descarregar o fichero">  <i style="font-size:50px" class="fa fa-file-pdf"></i> </a></td>
                                 <td><a href="{{route('baixar',$dados->certificado)}}" class="text-danger" title="Clica para descarregar o fichero">  <i style="font-size:50px" class="fa fa-file-pdf"></i> </a></td>
                                 <td>{{$dados->nome}}</td>
@@ -54,7 +54,7 @@
                                 <td>{{$dados->afiliacao}}</td>
                                 <td>{{$dados->telefone}}</td>
                                 <td>{{$dados->data}}</td>
-                                <td>{{$dados->funcionario->nome}}</td>
+                                <td>{{$dados->funcionario->nome ?? ""}}</td>
                                 <td>
                                     <a href="#Cadastrar" data-toggle="modal" class="text-primary" onclick="editar({{$dados}})" ><i class="fa fa-edit"></i></a>
                                     <a href="{{route('student.apagar',$dados->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>
@@ -85,70 +85,80 @@
                    <form action="{{route('student.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                          <input type="hidden" name="id" id="id">
-                         <input type="hidden" name="funcionario_id" value="{{ Auth::user()->id }}">
-                         <div class="form-group">
-                            <label for="nome">Nome Completo</label>
-                            <div class="form-input">
-                                <input type="text" name="nome" id="nome" class="form-control" />
+                         {{-- <input type="hidden" name="funcionario_id" value="{{ Auth::user()->id }}"> --}}
+                        <div class="row">
+                            <div class="form-group col-12 col-md-6 col-lg-6">
+                               <label for="nome">Nome Completo</label>
+                               <div class="form-input">
+                                   <input type="text" name="nome" id="nome" class="form-control" />
+                               </div>
+                           </div>
+                           <div class="form-group col-12 col-md-6 col-lg-6">
+                               <label for="genero">Genero</label>
+                               <div class="form-input">
+                                   <select name="genero" id="genero" class="form-control">
+                                       <option value="">Selecionar o Genero</option>
+                                       <option value="Masculino">Masculino</option>
+                                       <option value="Femenino">Femenino</option>
+                                   </select>
+                               </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-12 col-md-6 col-lg-6">
+                                <label for="provincia">Província</label>
+                                <div class="form-input">
+                                    <input type="text" name="provincia" id="provincia" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group col-12 col-md-6 col-lg-6">
+                                <label for="n_bilhete">Nº do Bilhete</label>
+                                <div class="form-input">
+                                    <input type="text" name="n_bilhete" id="n_bilhete" class="form-control" />
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="form-input">
-                                <select name="genero" id="genero" class="form-control">
-                                    <option value="">Selecionar o Genero</option>
-                                    <option value="Masculino">Masculino</option>
-                                    <option value="Femenino">Femenino</option>
-                                </select>
+                        <div class="row">
+                            <div class="form-group col-12 col-md-6 col-lg-6">
+                                <label for="naturalidade">Naturalidade</label>
+                                <div class="form-input">
+                                    <input type="text" name="naturalidade" id="naturalidade" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group col-12 col-md-6 col-lg-6">
+                                <label for="afiliacao">Nome do Pai e da Mãe</label>
+                                <div class="form-input">
+                                    <input type="text" name="afiliacao" id="afiliacao" class="form-control" />
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="provincia">Província</label>
-                            <div class="form-input">
-                                <input type="text" name="provincia" id="provincia" class="form-control" />
+                        <div class="row">
+                            <div class="form-group col-12 col-md-6 col-lg-6">
+                                <label for="telefone">Nº do Pai ou Mãe</label>
+                                <div class="form-input">
+                                    <input type="text" name="telefone" id="telefone" class="form-control" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="n_bilhete">Nº do Bilhete</label>
-                            <div class="form-input">
-                                <input type="text" name="n_bilhete" id="n_bilhete" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="naturalidade">Naturalidade</label>
-                            <div class="form-input">
-                                <input type="text" name="naturalidade" id="naturalidade" class="form-control" />
-                            </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="afiliacao">Nome do Pai e da Mãe</label>
-                            <div class="form-input">
-                                <input type="text" name="afiliacao" id="afiliacao" class="form-control" />
+                            <div class="form-group col-12 col-md-6 col-lg-6">
+                                <label for="foto">Foto</label>
+                                <div class="form-input">
+                                    <input type="file" accept="image/*" name="foto" id="foto" class="form-control" />
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="telefone">Nº do Pai ou Mãe</label>
-                            <div class="form-input">
-                                <input type="text" name="telefone" id="telefone" class="form-control" />
+                        <div class="row">
+                            <div class="form-group col-12 col-md-6 col-lg-6">
+                                <label for="certificado">Certificado</label>
+                                <div class="form-input">
+                                    <input type="file" name="certificado" id="certificado" class="form-control" />
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="foto">Foto</label>
-                            <div class="form-input">
-                                <input type="file" name="foto" id="foto" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="certificado">Certificado</label>
-                            <div class="form-input">
-                                <input type="file" name="certificado" id="certificado" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="bilhete">Bilhete</label>
-                            <div class="form-input">
-                                <input type="file" name="bilhete" id="bilhete" class="form-control" />
+                            <div class="form-group col-12 col-md-6 col-lg-6">
+                                <label for="bilhete">Bilhete</label>
+                                <div class="form-input">
+                                    <input type="file" name="bilhete" id="bilhete" class="form-control" />
+                                </div>
                             </div>
                         </div>
                 </div>
