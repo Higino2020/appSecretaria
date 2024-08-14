@@ -39,7 +39,6 @@
                             <tr>
                                 <td>{{$func->nome}}</td>
                                 <td>{{$func->cargo}}</td>
-                                <td>{{$func->departamento}}</td>
                                 <td>{{$func->telefone}}</td>
                                 <td>{{$func->email}}</td>
                                 <td>
@@ -72,46 +71,40 @@
                    <form action="{{route('funcio.store')}}" method="post">
                     @csrf
                     <input type="hidden" name="id" id="id">
-                        <div class="form-group">
-                            <label for="nome">Nome Completo</label>
-                            <div class="form-input">
-                                <input type="text" class="form-control" name="nome" id="nome">
+                        <div class="row">
+                            <div class="form-group col-12 col-md-6 col-lg-6">
+                                <label for="nome">Nome Completo</label>
+                                <div class="form-input">
+                                    <input type="text" class="form-control" name="nome" id="nome">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">E-mail</label>
-                            <div class="form-input">
-                                <input type="text" class="form-control" name="email" id="email">
+                            <div class="form-group col-12 col-md-6 col-lg-6">
+                                <label for="email">E-mail</label>
+                                <div class="form-input">
+                                    <input type="text" class="form-control" name="email" id="email">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="telefone">Telefone</label>
-                            <div class="form-input">
-                                <input type="text" class="form-control" name="telefone" id="telefone">
+                            <div class="form-group col-12 col-md-6 col-lg-6">
+                                <label for="telefone">Telefone</label>
+                                <div class="form-input">
+                                    <input type="text" class="form-control" name="telefone" id="telefone">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-input">
-                                <select name="cargo" id="cargo" class="form-control">
-                                    <option value="">Selecionar o Cargo</option>
-                                    <option value="Diretor">Diretor</option>
-                                    <option value="Secretario">Secretario</option>
-                                </select>
+                            <div class="form-group col-12 col-md-6 col-lg-6">
+                                <label for="telefone">Selecionar o Cargo</label>
+                                <div class="form-input">
+                                    <select name="cargo" id="cargo" class="form-control">
+                                        <option value="Diretor">Diretor</option>
+                                        <option value="Secretario">Secretario</option>
+                                        <option value="Secretario">Professor</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="departamento">Departamento</label>
-                            <div class="form-input">
-                                <select name="departamento" id="departamento" class="form-control">
-                                    <option value="R.H">R.H</option>
-                                    <option value="Finança">Finança</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="data_contratacao">Data de Contrato</label>
-                            <div class="form-input">
-                                <input type="date" max="{{date('m-d-Y')}}" class="form-control" id="data_contratacao" name="data_contratacao">
+                            <div class="form-group col-12 col-md-6 col-lg-6">
+                                <label for="data_contratacao">Data de Contrato</label>
+                                <div class="form-input">
+                                    <input type="date" max="{{date('m-d-Y')}}" class="form-control" id="data_contratacao" name="data_contratacao">
+                                </div>
                             </div>
                         </div>
                 </div>

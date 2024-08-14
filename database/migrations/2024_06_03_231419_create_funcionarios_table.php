@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->string('cargo');
-            $table->string('departamento');
             $table->string('telefone');
             $table->string('email');
             $table->date('data_contratacao');

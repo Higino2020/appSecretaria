@@ -29,7 +29,7 @@ class ClasseController extends Controller
             $classe= new Classe();
         }
         $classe->nome_classe=$request->nome_classe;
-        $classe->participante=$request->participante ?? $classe->participante;
+        $valor->funcionario_id= Auth::user()->funcionario->id ?? null;
         $classe->save();
         return redirect()->back()->with("Sucesso","CLASSE CADASTRADO");
     }

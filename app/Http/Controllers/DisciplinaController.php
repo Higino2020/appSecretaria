@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Disciplina;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DisciplinaController extends Controller
 {
@@ -30,7 +31,8 @@ class DisciplinaController extends Controller
                 $valor= new Disciplina();
             }
             $valor->nome_disciplina=$request->nome_disciplina;
-            $valor->funcionario_Id=$request->funcionario_Id;
+            $valor->professor=$request->professor;
+            $valor->funcionario_id= Auth::user()->funcionario->id ?? null;
             $valor->save();
             return redirect()->back()->with("Sucesso","Disciplina CADASTRADO");
         }

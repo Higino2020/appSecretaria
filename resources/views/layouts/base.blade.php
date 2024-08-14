@@ -100,9 +100,7 @@
                               <span class="ml-4">Turma</span>
                           </a>
                       </li>
-                      @else
                       <!-- INFORMACAO DA SECRETARIA QUE TERAO ACESSO-->
-
                       @endif
                   </ul>
               </nav>

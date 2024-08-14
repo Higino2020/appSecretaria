@@ -35,8 +35,9 @@
                     <tbody>
                         @foreach ($valor as $dados)
                             <tr>
+                                <td>{{$dados->id}}</td>
                                 <td>{{$dados->nome_disciplina}}</td>
-                                <td>{{$dados->funcionario_Id}}</td>
+                                <td>{{$dados->professor}}</td>
                                 <td>
                                     <a href="#Cadastrar" data-toggle="modal" class="text-primary" onclick="editar({{$dados}})" ><i class="fa fa-edit"></i></a>
                                     <a href="{{route('Disc.apagar',$dados->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>
@@ -67,7 +68,7 @@
                    <form action="{{route('Disc.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                          <input type="hidden" name="id" id="id">
-                        
+
                         <div class="form-group">
                             <label for="nome_disciplina">Nome da Disciplína</label>
                             <div class="form-input">
@@ -75,9 +76,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="funcionario_id">Professor</label>
+                            <label for="professor">Professor</label>
                             <div class="form-input">
-                                <select class="form-control" name="funcionario_id" id="funcionario_id">
+                                <select class="form-control" name="professor" id="professor">
                                     @foreach (App\Models\Funcionario::orderBy('nome','ASC')->get() as $funcio)
                                         <option value="{{$funcio->id}}">{{$funcio->nome}}</option>
                                     @endforeach

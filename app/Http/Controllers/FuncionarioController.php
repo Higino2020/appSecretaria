@@ -35,7 +35,6 @@ class FuncionarioController extends Controller
         }
         $valor->nome=$request->nome;
         $valor->cargo=$request->cargo;
-        $valor->departamento=$request->departamento;
         $valor->telefone=$request->telefone;
         $valor->email=$request->email;
         $valor->data_contratacao=$request->data_contratacao;

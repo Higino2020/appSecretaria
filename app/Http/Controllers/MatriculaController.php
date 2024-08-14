@@ -32,7 +32,7 @@ class MatriculaController extends Controller
         $Matricula->ano_lectivo=$request->ano_lectivo;
         $Matricula->estudante_Id=$request->estudante_Id;
         $Matricula->turma_Id=$request->turma_Id;
-        $Matricula->funcionario_Id=$request->funcionario_Id;
+        $Matricula->funcionario_id= Auth::user()->funcionario->id ?? null;
         $Matricula->save();
         return redirect()->back()->with("Sucesso","Matricula CADASTRADO");
     }

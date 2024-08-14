@@ -41,14 +41,13 @@
                     <tbody>
                         @foreach ($paut as $dados)
                             <tr>
-                                <td>{{$dados->estudante_id}}</td>
-                                <td>{{$dados->disciplina_id}}</td>
+                                <td>{{$dados->estudante->nome}}</td>
+                                <td>{{$dados->disciplina->nome_disciplina}}</td>
                                 <td>{{$dados->prova1}}</td>
                                 <td>{{$dados->prova2}}</td>
                                 <td>{{$dados->exame}}</td>
                                 <td>{{$dados->final}}</td>
                                 <td>{{$dados->periodo}}</td>
-                                <td>{{$dados->final}}</td>
                                 <td>{{$dados->status}}</td>
                                 <td>{{$dados->funcionario->nome}}</td>
                                 <td>
@@ -81,48 +80,48 @@
                    <form action="{{route('paut.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                          <input type="hidden" name="id" id="id">
-                        <div class="form-group">
-                            <label for="responsavel">Estudante</label>
-                            <div class="form-input">
-                                <select class="form-control" name="responsavel" id="responsavel">
-                                    @foreach (App\Models\estudante::orderBy('nome','ASC')->get() as $estudante_id)
-                                        <option value="{{$estudante_id->id}}">{{$estudante_id->nome}}</option>
-                                    @endforeach
-                                </select>
+                        <div class="row">
+                            <div class="form-group col-12 col-md-6 col-lg-6">
+                                <label for="estudante_id">Estudante</label>
+                                <div class="form-input">
+                                    <select class="form-control" name="estudante_id" id="estudante_id">
+                                        @foreach (App\Models\estudante::orderBy('nome','ASC')->get() as $estudante_id)
+                                            <option value="{{$estudante_id->id}}">{{$estudante_id->nome}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="responsavel">Disciplina</label>
+                            <div class="form-group col-12 col-md-6 col-lg-6">
+                            <label for="disciplina_id">Disciplina</label>
                             <div class="form-input">
-                                <select class="form-control" name="responsavel" id="responsavel">
+                                <select class="form-control" name="disciplina_id" id="disciplina_id">
                                     @foreach (App\Models\Disciplina::orderBy('nome_disciplina','ASC')->get() as $disciplina_id)
                                         <option value="{{$disciplina_id->id}}">{{$disciplina_id->nome_disciplina}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="nome_projeto">Primeira Prova</label>
+                            <div class="form-group col-12 col-md-6 col-lg-6">
+                            <label for="prova1">Primeira Prova</label>
                             <div class="form-input">
-                                <input type="number" name="nome_projeto" id="nome_projeto" class="form-control" />
+                                <input type="number" name="prova1" id="prova1" class="form-control" />
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="descricao">Segunda Prova</label>
+                            <div class="form-group col-12 col-md-6 col-lg-6">
+                            <label for="prova2">Segunda Prova</label>
                             <div class="form-input">
-                                <input type="number" name="nome_projeto" id="nome_projeto" class="form-control" />
+                                <input type="number" name="prova2" id="prova2" class="form-control" />
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="data_inicio">Exame</label>
+                            <div class="form-group col-12 col-md-6 col-lg-6">
+                            <label for="exame">Exame</label>
                             <div class="form-input">
-                                <input type="number"  class="form-control" name="data_inicio" id="data_inicio">
+                                <input type="number"  class="form-control" name="exame" id="exame">
                             </div>
                         </div>
-
-                        <div class="form-group">
+                            <div class="form-group col-12 col-md-6 col-lg-6">
                             <div class="form-input">
-                                <select name="status" id="status" class="form-control">
+                                <select name="periodo" id="periodo" class="form-control">
                                     <option value="">Selecionar o Período</option>
                                     <option value="Manhã">Manhã</option>
                                     <option value="Tarde">Tarde</option>
@@ -130,7 +129,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
+                            <div class="form-group col-12 col-md-6 col-lg-6">
                             <div class="form-input">
                                 <select name="status" id="status" class="form-control">
                                     <option value="">Selecionar Estado</option>
@@ -139,6 +138,7 @@
                                     <option value="Desistido">Desistido</option>
                                 </select>
                             </div>
+                        </div>
                         </div>
                 </div>
             </div>

@@ -32,7 +32,7 @@ class FaltaController extends Controller
                 $valor->qtd_falta=$request->qtd_falta;
                 $valor->data=$request->data;
                 $valor->estudantes_Id=$request->estudantes_Id;
-                $valor->funcionario_Id=$request->funcionario_Id;
+                $valor->funcionario_id= Auth::user()->funcionario->id ?? null;
                 $valor->save();
                 return redirect()->back()->with("Sucesso","Falta CADASTRADO");
             }

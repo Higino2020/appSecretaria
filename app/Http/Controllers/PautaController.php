@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pauta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PautaController extends Controller
 {
@@ -36,11 +37,11 @@ class PautaController extends Controller
             $valor2=$request->prova2;
             $valor3=$request->exame;
             $somatorio=($valor+$valor2+$valor3)/3;
-            $paut->final=$request->$somatorio;
+            $paut->final=$somatorio;
             $paut->status=$request->status;
             $paut->estudante_id=$request->estudante_id;
-            $paut->funcionario_id=$request->funcionario_id;
             $paut->disciplina_id=$request->disciplina_id;
+            $paut->funcionario_id= Auth::user()->funcionario->id ?? null;
             $paut->save();
             return redirect()->back()->with("Sucesso","PAUTA CADASTRADO");
         }
