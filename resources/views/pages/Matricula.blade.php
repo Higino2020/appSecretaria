@@ -26,10 +26,12 @@
                     <table id="datatable" class="table data-tables table-striped">
                     <thead>
                         <tr class="ligth">
-                            <th>Fichero</th>
-                            <th>Tipo de Documento</th>
-                            <th>Funcionario</th>
-                            <th>Descrição</th>
+                            <th>Estudante</th>
+                            <th>Classe</th>
+                            <th>Turma</th>
+                            <th>Ano lectivo</th>
+                            <th>Data de Matrícula</th>
+                            <th>Professor</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -37,10 +39,11 @@
                         @foreach ($Matricula as $dados)
                             <tr>
                                 <td>{{$dados->estudante_Id}}</td>
+                                <td>{{$dados->classe_id}}</td>
                                 <td>{{$dados->turma_Id}}</td>
-                                <td>{{$dados->funcionario->nome?? ''}}</td>
                                 <td>{{$dados->ano_lectivo}}</td>
                                 <td>{{$dados->data_matricula}}</td>
+                                <td>{{$dados->funcionario->nome}}</td>
                                 <td>
                                     <a href="#Cadastrar" data-toggle="modal" class="text-primary" onclick="editar({{$dados}})" ><i class="fa fa-edit"></i></a>
                                     <a href="{{route('Matri.apagar',$dados->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>
@@ -73,9 +76,9 @@
                         <input type="hidden" name="id" id="id">
                         <input type="hidden" name="funcionario_id" value="{{ Auth::user()->id }}">
                         <div class="form-group">
-                            <label for="responsavel">Estudante</label>
+                            <label for="estudante_Id">Estudante</label>
                             <div class="form-input">
-                                <select class="form-control" name="responsavel" id="responsavel">
+                                <select class="form-control" name="estudante_Id" id="estudante_Id">
                                     @foreach (App\Models\estudante::orderBy('nome','ASC')->get() as $estudante_id)
                                         <option value="{{$estudante_id->id}}">{{$estudante_id->nome}}</option>
                                     @endforeach
@@ -83,20 +86,40 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="responsavel">Turma</label>
+                            <label for="classe_id">Classe</label>
                             <div class="form-input">
-                                <select class="form-control" name="responsavel" id="responsavel">
-                                    @foreach (App\Models\estudante::orderBy('nome','ASC')->get() as $estudante_id)
-                                        <option value="{{$estudante_id->id}}">{{$estudante_id->nome}}</option>
+                                <select class="form-control" name="classe_id" id="classe_id">
+                                    @foreach (App\Models\Classe::orderBy('nome','ASC')->get() as $classe_id)
+                                        <option value="{{$classe_id->id}}">{{$classe_id->nome}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="turma_Id">Turma</label>
+                            <div class="form-input">
+                                <select class="form-control" name="turma_Id" id="turma_Id">
+                                    @foreach (App\Models\Turma::orderBy('nome','ASC')->get() as $turma_Id)
+                                        <option value="{{$turma_Id->id}}">{{$turma_Id->nome}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="form-input">
-                                <label for="data">Ano Letivo</label>
+                                <label for="ano_lectivo">Ano Letivo</label>
                             </div>
-                            <input type="date" min="{{date('Y-m-d')}}" class="form-control" name="data" id="data">
+                            <input type="date" min="{{date('Y-m-d')}}" class="form-control" name="ano_lectivo" id="ano_lectivo">
+                        </div>
+                        <div class="form-group">
+                            <label for="professor_id">Professor</label>
+                            <div class="form-input">
+                                <select class="form-control" name="professor_id" id="professor_id">
+                                    @foreach (App\Models\Funcionario::orderBy('nome','ASC')->get() as $professor_id)
+                                        <option value="{{$professor_id->id}}">{{$professor_id->nome}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                 </div>
             </div>
@@ -112,7 +135,11 @@
 <script>
     function editar(valor) {
         document.getElementById('id').value = valor.id;
-        document.getElementById('tipo_documento').value = valor.tipo_documento;
+        document.getElementById('ano_lectivo').value = valor.ano_lectivo;
+        document.getElementById('turma_Id').value = valor.turma_Id;
+        document.getElementById('classe_id').value = valor.classe_id;
+        document.getElementById('estudante_Id').value = valor.estudante_Id;
+        document.getElementById('professor_id').value = valor.professor_id;
         document.getElementById('descricao').value = valor.descricao;
     }
     function limpar() {

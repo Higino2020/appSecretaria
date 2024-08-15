@@ -9,9 +9,9 @@ class Falta extends Model
 {
     use HasFactory;
     public function estudante(){
-        return $this->belongsTo(estudante::class,'estudante_id','id');
+        return $this->belongsTo(estudante::class,'estudantes_Id','id');
     }
     public function funcionario(){
-        return $this->belongsTo(Funcionario::class,'funcionario_id','id');
+        return $this->belongsTo(Funcionario::class,'funcionario_Id','id');
     }
 }

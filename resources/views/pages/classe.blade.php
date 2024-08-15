@@ -81,16 +81,13 @@
     function classe_editor(valor) {
         document.getElementById('id').value = valor.id;
         document.getElementById('nome_classe').value = valor.nome_classe;
-        document.getElementById('participante').value = valor.participante;
     }
     function classe_show(valor) {
         document.getElementById('nome_classe').innerText = valor.nome_classe;
-        document.getElementById('partic').innerText = valor.funcionario.nome;
     }
     function limpar() {
         document.getElementById('id').value = "";
         document.getElementById('nome_classe').value = "";
-        document.getElementById('participante').value = "";
     }
 
 </script>

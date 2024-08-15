@@ -39,7 +39,7 @@ class FuncionarioController extends Controller
         $valor->email=$request->email;
         $valor->data_contratacao=$request->data_contratacao;
         $valor->save();
-        return redirect()->back()->with("Sucesso","FUNCIONARIO CADASTRADO");
+        return redirect()->back()->with("SUCESSO","FUNCIONARIO CADASTRADO");
     }
 
     /**
@@ -48,8 +48,8 @@ class FuncionarioController extends Controller
     public function show( $id)
     {
         //
-        Funcionario::find($id)->delete;
-        return redirect()->back()->with("Sucesso","FUNCIONARIO ELIMINADO");
+        $valor=Funcionario::find($id);
+        return view("pages.Funcionario",compact("valor"));
     }
 
     /**
@@ -59,6 +59,6 @@ class FuncionarioController extends Controller
     {
         //
         Funcionario::find($id)->delete();
-        return redirect()->back()->with("Sucesso","FUNCIONARIO ELIMINADO");
+        return redirect()->back()->with("SUCESSO","FUNCIONARIO ELIMINADO");
     }
 }

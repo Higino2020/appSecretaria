@@ -33,7 +33,7 @@ class TurmaController extends Controller
                 $valor->nome_turma=$request->nome_turma;
                 $valor->funcionario_id= Auth::user()->funcionario->id ?? null;
                 $valor->save();
-                return redirect()->back()->with("Sucesso","Turma CADASTRADO");
+                return redirect()->back()->with("SUCESSO","Turma CADASTRADO");
             }
 
             /**
@@ -42,8 +42,8 @@ class TurmaController extends Controller
             public function show( $id)
             {
                 //
-                Turma::find($id)->delete;
-                return redirect()->back()->with("Sucesso","Turma ELIMINADO");
+                $valor=Turma::find($id);
+                return view("pages.Turma",compact("valor"));
             }
 
             /**
@@ -53,7 +53,7 @@ class TurmaController extends Controller
             {
                 //
                 Turma::find($id)->delete();
-                return redirect()->back()->with("Sucesso","Turma ELIMINADO");
+                return redirect()->back()->with("SUCESSO","Turma ELIMINADO");
             }
         }
 

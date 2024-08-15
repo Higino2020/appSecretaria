@@ -43,8 +43,8 @@ class DisciplinaController extends Controller
         public function show( $id)
         {
             //
-            Disciplina::find($id)->delete;
-            return redirect()->back()->with("Sucesso","Disciplina ELIMINADO");
+            $valor=Disciplina::find($id);
+            return view("pages.Disciplina",compact("valor"));
         }
 
         /**

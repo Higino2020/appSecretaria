@@ -35,7 +35,7 @@ class FaltaController extends Controller
                 $valor->estudantes_Id=$request->estudantes_Id;
                 $valor->funcionario_id= Auth::user()->funcionario->id ?? null;
                 $valor->save();
-                return redirect()->back()->with("Sucesso","Falta CADASTRADO");
+                return redirect()->back()->with("SUCESSO","FALTA CADASTRADO");
             }
 
             /**
@@ -44,8 +44,8 @@ class FaltaController extends Controller
             public function show( $id)
             {
                 //
-                Falta::find($id)->delete;
-                return redirect()->back()->with("Sucesso","Falta ELIMINADO");
+                $valor=Falta::find($id);
+                return view("pages.Falta",compact("valor"));
             }
 
             /**
@@ -55,7 +55,7 @@ class FaltaController extends Controller
             {
                 //
                 Falta::find($id)->delete();
-                return redirect()->back()->with("Sucesso","Falta ELIMINADO");
+                return redirect()->back()->with("SUCESSO","FALTA ELIMINADO");
             }
         }
 

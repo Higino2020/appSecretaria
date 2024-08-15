@@ -32,6 +32,7 @@ class MatriculaController extends Controller
         $Matricula->data_matricula=date('Y-m-d');
         $Matricula->ano_lectivo=$request->ano_lectivo;
         $Matricula->estudante_Id=$request->estudante_Id;
+        $Matricula->classe_id=$request->classe_id;
         $Matricula->turma_Id=$request->turma_Id;
         $Matricula->funcionario_id= Auth::user()->funcionario->id ?? null;
         $Matricula->save();

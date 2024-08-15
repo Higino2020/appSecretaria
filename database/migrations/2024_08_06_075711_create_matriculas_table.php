@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('data_matricula');
             $table->string('ano_lectivo');
+            $table->foreignId('classe_id')->constrained('Classes');
             $table->foreignId('estudante_Id')->constrained('estudantes');
+            $table->foreignId('professor_id')->constrained('Funcionarios');
             $table->foreignId('turma_Id')->constrained('turmas');
             $table->foreignId('funcionario_Id')->constrained('Funcionarios');
             $table->timestamps();

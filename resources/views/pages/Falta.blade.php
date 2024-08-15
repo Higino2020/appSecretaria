@@ -36,7 +36,7 @@
                     <tbody>
                         @foreach ($valor as $dados)
                             <tr>
-                                <td>{{$dados->estudantes_Id}}</td>
+                                <td>{{$dados->estudante->nome}}</td>
                                 <td>{{$dados->qtd_falta}}</td>
                                 <td>{{$dados->data}}</td>
                                 <td>{{$dados->funcionario->nome}}</td>
@@ -71,9 +71,9 @@
                     @csrf
                          <input type="hidden" name="id" id="id">
                          <div class="form-group">
-                            <label for="responsavel">Estudante</label>
+                            <label for="estudantes_Id">Estudante</label>
                             <div class="form-input">
-                                <select class="form-control" name="responsavel" id="responsavel">
+                                <select class="form-control" name="estudantes_Id" id="estudantes_Id">
                                     @foreach (App\Models\estudante::orderBy('nome','ASC')->get() as $estudante_id)
                                         <option value="{{$estudante_id->id}}">{{$estudante_id->nome}}</option>
                                     @endforeach
@@ -81,19 +81,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="nome_tarefa">Quantidade de Faltas</label>
+                            <label for="qtd_falta">Quantidade de Faltas</label>
                             <div class="form-input">
-                                <input type="text" name="nome_tarefa" id="nome_tarefa" class="form-control" />
+                                <input type="text" name="qtd_falta" id="qtd_falta" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="responsavel">Funcionario</label>
+                            <label for="data">Data</label>
                             <div class="form-input">
-                                <select class="form-control" name="responsavel" id="responsavel">
-                                    @foreach (App\Models\Funcionario::orderBy('nome','ASC')->get() as $Funcionario_id)
-                                        <option value="{{$Funcionario_id->id}}">{{$Funcionario_id->nome}}</option>
-                                    @endforeach
-                                </select>
+                                <input type="date" name="data" id="data" class="form-control" />
                             </div>
                         </div>
                 </div>
@@ -110,23 +106,15 @@
 <script>
     function editar(valor) {
         document.getElementById('id').value = valor.id;
-        document.getElementById('nome_tarefa').value = valor.nome_tarefa;
-        document.getElementById('descricao').value = valor.descricao;
-        document.getElementById('data_limite').value = valor.data_limite;
-        document.getElementById('prioridade').value = valor.prioridade;
-        document.getElementById('status').value = valor.status;
-        document.getElementById('projeto_id').value = valor.projeto_id;
-        document.getElementById('responsavel').value = valor.responsavel;
+        document.getElementById('estudantes_Id').value = valor.estudante_id;
+        document.getElementById('qtd_falta').value = valor.qtd_falta;
+        document.getElementById('data').value = valor.data;
     }
     function limpar() {
         document.getElementById('id').value = "";
-        document.getElementById('nome_tarefa').value = "";
-        document.getElementById('descricao').value = "";
-        document.getElementById('data_limite').value = "";
-        document.getElementById('prioridade').value = "";
-        document.getElementById('status').value = "";
-        document.getElementById('projeto_id').value = "";
-        document.getElementById('responsavel').value = "";
+        document.getElementById('estudantes_Id').value = "";
+        document.getElementById('qtd_falta').value = "";
+        document.getElementById('data').value = "";
     }
 </script>
 @endsection

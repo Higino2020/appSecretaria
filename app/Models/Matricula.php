@@ -17,4 +17,8 @@ class Matricula extends Model
     public function funcionario(){
         return $this->belongsTo(Funcionario::class,'funcionario_Id','id');
     }
+    public function Classe(){
+        return $this->belongsTo(Classe::class,'classe_Id','id');
+    }
+
 }
