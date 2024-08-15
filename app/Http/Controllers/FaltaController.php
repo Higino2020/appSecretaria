@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Falta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FaltaController extends Controller
 {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Classe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClasseController extends Controller
 {
@@ -29,7 +30,7 @@ class ClasseController extends Controller
             $classe= new Classe();
         }
         $classe->nome_classe=$request->nome_classe;
-        $valor->funcionario_id= Auth::user()->funcionario->id ?? null;
+        $classe->funcionario_id= Auth::user()->funcionario->id ?? null;
         $classe->save();
         return redirect()->back()->with("Sucesso","CLASSE CADASTRADO");
     }

@@ -66,7 +66,6 @@
                    <form action="{{route('Turm.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                          <input type="hidden" name="id" id="id">
-                         <input type="hidden" name="funcionario_id" value="{{Auth::user()->id}}">
                          <div class="form-group">
                             <label for="nome_turma">Nome</label>
                             <div class="form-input">
