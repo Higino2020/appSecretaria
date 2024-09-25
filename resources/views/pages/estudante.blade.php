@@ -134,9 +134,9 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-12 col-md-6 col-lg-6">
-                                <label for="telefone">Nº do Pai ou Mãe</label>
+                                <label for="telefone">Nº do Tlfn do Encarregado</label>
                                 <div class="form-input">
-                                    <input type="text" name="telefone" id="telefone" class="form-control" />
+                                    <input type="number" name="telefone" id="telefone" class="form-control" />
                                 </div>
                             </div>
 
@@ -151,13 +151,13 @@
                             <div class="form-group col-12 col-md-6 col-lg-6">
                                 <label for="certificado">Certificado</label>
                                 <div class="form-input">
-                                    <input type="file" name="certificado" id="certificado" class="form-control" />
+                                    <input type="file" accept=".txt,.pdf,.docx" name="certificado" id="certificado" class="form-control" />
                                 </div>
                             </div>
                             <div class="form-group col-12 col-md-6 col-lg-6">
                                 <label for="bilhete">Bilhete</label>
                                 <div class="form-input">
-                                    <input type="file" name="bilhete" id="bilhete" class="form-control" />
+                                    <input type="file" accept=".txt,.pdf,.docx" name="bilhete" id="bilhete" class="form-control" />
                                 </div>
                             </div>
                         </div>

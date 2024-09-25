@@ -36,7 +36,7 @@
           <div class="data-scrollbar" data-scroll="1">
               <nav class="iq-sidebar-menu">
                   <ul id="iq-sidebar-toggle" class="iq-menu">
-                    @if(Auth::user()->tipo !="Director")
+                    @if(Auth::user()->tipo !="funcionario")
                     <li class="active">
                         <a href="{{url('/')}}" class="svg-icon">
                             <svg  class="svg-icon" id="p-dash1" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -57,6 +57,22 @@
                               <span class="ml-4">Funcionario</span>
                           </a>
                       </li>
+
+
+                      <!-- INFORMACAO DA SECRETARIA QUE TERAO ACESSO-->
+                      @else
+                      <li class=" ">
+                        <a href="{{route('paut.index')}}" class="svg-icon">
+                            <i class="fa fa-money-bill"></i>
+                              <span class="ml-4">Pautas</span>
+                          </a>
+                      </li>
+                      <li class=" ">
+                        <a href="{{route('falt.index')}}" class="svg-icon">
+                            <i class="fa fa-envelope"></i>
+                              <span class="ml-4">Faltas</span>
+                          </a>
+                      </li>
                       <li class=" ">
                         <a href="{{route('student.index')}}" class="svg-icon">
                             <i class="fa fa-users"></i>
@@ -64,18 +80,12 @@
                           </a>
                       </li>
                       <li class=" ">
-                        <a href="{{route('paut.index')}}" class="svg-icon">
-                            <i class="fa fa-money-bill"></i>
-                              <span class="ml-4">Pautas</span>
-                          </a>
-                      </li>
-
-                      <li class=" ">
                         <a href="{{route('Disc.index')}}" class="svg-icon">
                             <i class="fa fa-briefcase"></i>
                               <span class="ml-4">Disciplinas</span>
                           </a>
                       </li>
+
                       <li class=" ">
                         <a href="{{route('Matri.index')}}" class="svg-icon">
                             <i class="fa fa-list-alt"></i>
@@ -89,18 +99,11 @@
                           </a>
                       </li>
                       <li class=" ">
-                        <a href="{{route('falt.index')}}" class="svg-icon">
-                            <i class="fa fa-envelope"></i>
-                              <span class="ml-4">Faltas</span>
-                          </a>
-                      </li>
-                      <li class=" ">
                         <a href="{{route('Turm.index')}}" class="svg-icon">
                             <i class="fa fa-file"></i>
                               <span class="ml-4">Turma</span>
                           </a>
                       </li>
-                      <!-- INFORMACAO DA SECRETARIA QUE TERAO ACESSO-->
                       @endif
                   </ul>
               </nav>

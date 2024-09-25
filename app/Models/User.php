@@ -55,7 +55,7 @@ class User extends Authenticatable
         $user = new User();
         $user->name = $request->nome;
         $user->email = $request->email;
-        $user->tipo = "Funcionario";
+        $user->tipo = "funcionario";
         $user->password = bcrypt("secretaria2024");
         $user->save();
         return $user;

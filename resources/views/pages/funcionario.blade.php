@@ -81,13 +81,14 @@
                             <div class="form-group col-12 col-md-6 col-lg-6">
                                 <label for="email">E-mail</label>
                                 <div class="form-input">
-                                    <input type="text" class="form-control" name="email" id="email">
+                                    <input type="email" class="form-control" name="email" id="email">
                                 </div>
                             </div>
                             <div class="form-group col-12 col-md-6 col-lg-6">
                                 <label for="telefone">Telefone</label>
                                 <div class="form-input">
-                                    <input type="text" class="form-control" name="telefone" id="telefone">
+                                    <input type="number" name="telefone" id="telefone" class="form-control" maxlength="9" value="{{ old('telefone') }}" required>
+                                    <small id="nomeHelp" class="form-text text-muted">Máximo de 9 caracteres.</small>
                                 </div>
                             </div>
                             <div class="form-group col-12 col-md-6 col-lg-6">
@@ -119,6 +120,14 @@
 </div>
 
 <script>
+    const nomeInput = document.getElementById('telefone');
+    const nomeHelp = document.getElementById('nomeHelp');
+    const maxLength = 9;
+
+    nomeInput.addEventListener('input', () => {
+        const currentLength = nomeInput.value.length;
+        nomeHelp.textContent = `Máximo de ${maxLength} caracteres. (${currentLength}/${maxLength})`;
+    });
     function editar(valor) {
         document.getElementById('id').value = valor.id;
         document.getElementById('nome').value = valor.nome;
