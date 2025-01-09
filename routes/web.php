@@ -3,8 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
 use Plank\Mediable\Media;
-use Intervention\Image\Laravel\Facades\Image;
-use Intervention\Image\ImageManager;
+use Intervention\Image\ImageManager as Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
@@ -24,7 +23,7 @@ Route::group(['middleware'=>'auth'],function(){
 
     Route::get('/', function () {
         return view('pages.index');
-    });
+    })->name('index');
     Route::resource('user',UserController::class);
     Route::resource('funcio',FuncionarioController::class);
     Route::get('apager/{id}/funcio',[FuncionarioController::class,'apagar'])->name('funcio.apagar');
@@ -52,21 +51,9 @@ Route::group(['middleware'=>'auth'],function(){
             } else {
                 $path = 'default.png';
             }
-            $img = Image::make($media->getAbsolutePath());
-            $w = 300;
-            $h = 300;
-
-            if (request()->w != null) {
-                $w = request()->w;
-            }
-            if (request()->h != null) {
-                $h = request()->h;
-            }
-            // resize the image to a width of 300 and constrain aspect ratio (auto height)
-            $img->resize($w, $h, function ($constraint) {
-                $constraint->aspectRatio();
-            });
+            $img = Image::make($media->getAbsolutePath())->resize(300, 200);
             $img->stream();
+            dd($img->__toString());
             //Log::debug(storage_path() . '/app/' . $path);
             return (new Response($img->__toString(), 200))
                 ->header('Content-Type', '*');
@@ -86,5 +73,5 @@ Route::group(['middleware'=>'auth'],function(){
 Auth::routes();
 
 Route::get('/home', function(){
-    return view('welcome');
+    return redirect()->route('index');
 })->name('home');

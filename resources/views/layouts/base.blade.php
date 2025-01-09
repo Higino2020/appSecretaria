@@ -36,7 +36,6 @@
           <div class="data-scrollbar" data-scroll="1">
               <nav class="iq-sidebar-menu">
                   <ul id="iq-sidebar-toggle" class="iq-menu">
-                    @if(Auth::user()->tipo !="funcionario")
                     <li class="active">
                         <a href="{{url('/')}}" class="svg-icon">
                             <svg  class="svg-icon" id="p-dash1" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -45,6 +44,7 @@
                             <span class="ml-4">Dashboards</span>
                         </a>
                     </li>
+                    @if(Auth::user()->tipo == "Admin")
                       <li class=" ">
                           <a href="{{route('user.index')}}" class="svg-icon">
                             <i class="fa fa-user"></i>
@@ -57,10 +57,8 @@
                               <span class="ml-4">Funcionario</span>
                           </a>
                       </li>
-
-
+                      @endif
                       <!-- INFORMACAO DA SECRETARIA QUE TERAO ACESSO-->
-                      @else
                       <li class=" ">
                         <a href="{{route('paut.index')}}" class="svg-icon">
                             <i class="fa fa-money-bill"></i>
@@ -73,6 +71,7 @@
                               <span class="ml-4">Faltas</span>
                           </a>
                       </li>
+                     
                       <li class=" ">
                         <a href="{{route('student.index')}}" class="svg-icon">
                             <i class="fa fa-users"></i>
@@ -85,7 +84,7 @@
                               <span class="ml-4">Disciplinas</span>
                           </a>
                       </li>
-
+                      
                       <li class=" ">
                         <a href="{{route('Matri.index')}}" class="svg-icon">
                             <i class="fa fa-list-alt"></i>
@@ -104,7 +103,6 @@
                               <span class="ml-4">Turma</span>
                           </a>
                       </li>
-                      @endif
                   </ul>
               </nav>
 
@@ -166,7 +164,11 @@
                                               </div>
                                               <div class="p-3">
                                                   <h5 class="mb-1">{{Auth::user()->name}}</h5>
-                                                  <p class="mb-0">{{Auth::user()->tipo}}</p>
+                                                  @if(Auth::user()->tipo == "Admin")
+                                                    <p class="mb-0">{{Auth::user()->tipo}}</p>
+                                                  @else
+                                                    <p class="mb-0">{{Auth::user()->funcionario->cargo}}</p>
+                                                  @endif
                                                   <div class="d-flex align-items-center justify-content-center mt-3">
                                                       <a href="app/user-profile.html" class="btn border mr-2">Perfil</a>
                                                       <a class="btn border" href="{{ route('logout') }}"

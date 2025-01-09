@@ -72,47 +72,20 @@
                     @csrf
                     <input type="hidden" name="id" id="id">
                         <div class="row">
-                            <div class="form-group col-12 col-md-6 col-lg-6">
-                                <label for="nome">Nome Completo</label>
-                                <div class="form-input">
-                                    <input type="text" class="form-control" name="nome" id="nome">
-                                </div>
-                            </div>
-                            <div class="form-group col-12 col-md-6 col-lg-6">
-                                <label for="email">E-mail</label>
-                                <div class="form-input">
-                                    <input type="email" class="form-control" name="email" id="email">
-                                </div>
-                            </div>
-                            <div class="form-group col-12 col-md-6 col-lg-6">
-                                <label for="telefone">Telefone</label>
-                                <div class="form-input">
-                                    <input type="number" name="telefone" id="telefone" class="form-control" maxlength="9" value="{{ old('telefone') }}" required>
-                                    <small id="nomeHelp" class="form-text text-muted">Máximo de 9 caracteres.</small>
-                                </div>
-                            </div>
-                            <div class="form-group col-12 col-md-6 col-lg-6">
-                                <label for="telefone">Selecionar o Cargo</label>
-                                <div class="form-input">
-                                    <select name="cargo" id="cargo" class="form-control">
-                                        <option value="Diretor">Diretor</option>
-                                        <option value="Secretario">Secretario</option>
-                                        <option value="Secretario">Professor</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group col-12 col-md-6 col-lg-6">
-                                <label for="data_contratacao">Data de Contrato</label>
-                                <div class="form-input">
-                                    <input type="date" max="{{date('m-d-Y')}}" class="form-control" id="data_contratacao" name="data_contratacao">
-                                </div>
-                            </div>
+                            <x-input-normal id="nome" name="nome" type="text" titulo="Nome Completo" alert="" />
+                            <x-input-normal id="email" name="email" type="email" titulo="E-mail" alert="" />
+                            <x-input-normal id="telefone" name="telefone" type="text" titulo="Telefone"  alert="Máximo de 9 caracteres." />
+                            <x-select>
+                                <option value="Diretor">Diretor</option>
+                                <option value="Secretario">Secretario</option>
+                                <option value="Secretario">Professor</option>
+                            </x-select>    
+                            <x-input-normal id="data_contratacao" name="data_contratacao" type="date" titulo="Data de Contrato" alert="" />
                         </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Salvar</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <x-botao-form />
             </form>
             </div>
         </div>
